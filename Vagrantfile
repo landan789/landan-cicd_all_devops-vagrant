@@ -22,11 +22,15 @@ Vagrant.configure(2) do |config|
       private_networks.each do |private_network|
         subconfig.vm.network "private_network", ip: private_network["ip"], virtualbox__intnet: private_network["desc"]
       end
-      
-      subconfig.vm.synced_folder ".", "/vagrant"
-      subconfig.vm.provider "virtualbox" do |v|
-        v.memory = node["memory"]
-        v.cpus = node["cpus"]
+
+      subconfig.vm.synced_folder "../../projects", "/home/vagrant/www"
+      subconfig.vm.synced_folder ".", "/vagrant", disabled: true
+      subconfig.vm.provider "virtualbox" do |vb|
+        vb.name = "centos7x6-" + node["name"] # virtual box 的顯示名稱
+        vb.gui = false
+        vb.cpus = node["cpus"]
+        vb.memory = node["memory"]
+
       end
     end
   end
