@@ -1,8 +1,8 @@
 ---
 - name: r1
   box: centos/7
-  memory: 512
   cpus: 1
+  memory: 512
   priv_ip_1: 192.168.250.101  #HostOnly interface
   private_networks:  #Internal only interfaces
     - ip: 192.168.12.11
@@ -15,8 +15,8 @@
       desc: 'Network to Advertise'
 - name: r2
   box: centos/7
-  memory: 512
   cpus: 1
+  memory: 512
   priv_ip_1: 192.168.250.102  #HostOnly interface
   private_networks:  #Internal only interfaces
     - ip: 192.168.23.12
@@ -27,8 +27,8 @@
       desc: 'Network to Advertise'
 - name: r3
   box: centos/7
-  memory: 512
   cpus: 1
+  memory: 512
   priv_ip_1: 192.168.250.103  #HostOnly interface
   private_networks:  #Internal only interfaces
     - ip: 192.168.31.13
@@ -39,8 +39,8 @@
       desc: 'Network to Advertise'
 - name: r4
   box: centos/7
-  memory: 512
   cpus: 1
+  memory: 512
   priv_ip_1: 192.168.250.104  #HostOnly interface
   private_networks:  #Internal only interfaces
     - ip: 192.168.14.14
