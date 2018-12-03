@@ -32,15 +32,17 @@ Vagrant.configure(2) do |config|
 
       private_networks = node["private_networks"]
       private_networks.each do |private_network|
-        subconfig.vm.network "private_network", ip: private_network["ip"], virtualbox__intnet: private_network["desc"]
+        # :private_network INSTEAD OF "private_network"
+        subconfig.vm.network :private_network, ip: private_network["ip"]
       end
 
-     #  if !!node["forwarded_ports"]
-     #  	forwarded_ports = node["forwarded_ports"]
-     #    forwarded_ports.each do |forwarded_port|
-     #      subconfig.vm.network "forwarded_port", adapter: 1, guest: forwarded_port["guest"], host: ["host"] # Node inspect
-     #    end
-  	  # end
+      if node["forwarded_ports"]
+        forwarded_ports = node["forwarded_ports"]
+        forwarded_ports.each do |forwarded_port|
+        # :private_network INSTEAD OF "private_network"
+        subconfig.vm.network :forwarded_port, guest: forwarded_port["guest"], host: forwarded_port["host"]
+        end
+      end
 
       subconfig.vm.synced_folder "../../projects", "/home/vagrant/www"
       subconfig.vm.synced_folder ".", "/vagrant", disabled: true
