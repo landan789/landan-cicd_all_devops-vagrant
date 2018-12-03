@@ -1,4 +1,4 @@
-SCRIPTS_PATH = "shell/"
+SCRIPTS_PATH = "shells/"
 ssh_pub_key = File.readlines("C:/Users/Administrator/.ssh/id_rsa.pub").first.strip
 
 SERVERS = [
