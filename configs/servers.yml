@@ -1,0 +1,91 @@
+---
+-
+  define: "ansible"
+  box: "centos/7"
+  private_network: "10.0.0.11"
+  shells:
+    -
+      path: "restart_sshd.sh"
+      args: ""
+  cpus: 1
+  memory: "256"
+-
+  define: "gitlab"
+  box: "centos/7"
+  private_network: "10.0.0.12"
+  shells:
+    -
+      path: "restart_sshd.sh"
+      args: ""
+  cpus: 1
+  memory: "256"
+-
+  define: "jenkins"
+  box: "centos/7"
+  private_network: "10.0.0.13"
+  shells:
+    -
+      path: "restart_sshd.sh"
+      args: ""
+  cpus: 1
+  memory: "256"
+-
+  define: "nginx"
+  box: "centos/7"
+  private_network: "10.0.0.21"
+  shells:
+    -
+      path: "restart_sshd.sh"
+      args: ""
+  cpus: 1
+  memory: "256"
+-
+  define: "php1"
+  box: "centos/7"
+  private_network: "10.0.0.31"
+  shells:
+    -
+      path: "restart_sshd.sh"
+      args: ""
+  cpus: 1
+  memory: "256"
+-
+  define: "php2"
+  box: "centos/7"
+  private_network: "10.0.0.32"
+  shells:
+    -
+      path: "restart_sshd.sh"
+      args: ""
+  cpus: 1
+  memory: "256"
+-  
+  define: "mysql1"
+  box: "centos/7"
+  private_network: "10.0.0.41"
+  shells:
+    -
+      path: "restart_sshd.sh"
+      args: ""
+  cpus: 1
+  memory: "256"
+-  
+  define: "mysql2"
+  box: "centos/7"
+  private_network: "10.0.0.42"
+  shells:
+    -
+      path: "restart_sshd.sh"
+      args: ""
+  cpus: 1
+  memory: "256"
+-  
+  define: "mysql3"
+  box: "centos/7"
+  private_network: "10.0.0.43"
+  shells:
+    -
+      path: "restart_sshd.sh"
+      args: ""
+  cpus: 1
+  memory: "256"
