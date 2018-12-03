@@ -15,7 +15,8 @@ Vagrant.configure(2) do |config|
 
   NODES.each do |node|
     config.vm.define node["name"] do |subconfig|
-
+  	  subconfig.ssh.username = "vagrant"
+      #subconfig.ssh.password = "vagrant"
       subconfig.ssh.forward_agent = true
       subconfig.ssh.insert_key = false # must be false, ~/.ssh/authorized_keys in VM can not be modified chmod after Vagrant 1.8.5
       #subconfig.ssh.private_key_path = "./.ssh/id_rsa" # must be comment , ~/.ssh/authorized_keys in VM can not be modified chmod after Vagrant 1.8.5
@@ -33,6 +34,13 @@ Vagrant.configure(2) do |config|
       private_networks.each do |private_network|
         subconfig.vm.network "private_network", ip: private_network["ip"], virtualbox__intnet: private_network["desc"]
       end
+
+     #  if !!node["forwarded_ports"]
+     #  	forwarded_ports = node["forwarded_ports"]
+     #    forwarded_ports.each do |forwarded_port|
+     #      subconfig.vm.network "forwarded_port", adapter: 1, guest: forwarded_port["guest"], host: ["host"] # Node inspect
+     #    end
+  	  # end
 
       subconfig.vm.synced_folder "../../projects", "/home/vagrant/www"
       subconfig.vm.synced_folder ".", "/vagrant", disabled: true

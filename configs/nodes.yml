@@ -35,6 +35,9 @@
   private_networks:  #Internal only interfaces
     - ip: 10.0.0.21
       desc: 01-to-04
+  forwarded_ports:
+    - guest: 80
+      host: 80
 - name: php1
   box: centos/7
   cpus: 1
