@@ -23,7 +23,7 @@ Vagrant.configure(2) do |config|
       end
       subconfig.vm.synced_folder ".", "/vagrant"
       subconfig.vm.provider "virtualbox" do |v|
-        v.memory = node["mem"]
+        v.memory = node["memory"]
         v.cpus = node["cpus"]
       end
     end

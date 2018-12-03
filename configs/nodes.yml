@@ -1,7 +1,7 @@
 ---
 - name: r1
-  box: ubuntu/trusty64
-  mem: 512
+  box: centos/7
+  memory: 512
   cpus: 1
   priv_ip_1: 192.168.250.101  #HostOnly interface
   priv_ips:  #Internal only interfaces
@@ -14,8 +14,8 @@
     - ip: 1.1.1.10
       desc: 'Network to Advertise'
 - name: r2
-  box: ubuntu/trusty64
-  mem: 512
+  box: centos/7
+  memory: 512
   cpus: 1
   priv_ip_1: 192.168.250.102  #HostOnly interface
   priv_ips:  #Internal only interfaces
@@ -26,8 +26,8 @@
     - ip: 2.2.2.10
       desc: 'Network to Advertise'
 - name: r3
-  box: ubuntu/trusty64
-  mem: 512
+  box: centos/7
+  memory: 512
   cpus: 1
   priv_ip_1: 192.168.250.103  #HostOnly interface
   priv_ips:  #Internal only interfaces
@@ -38,8 +38,8 @@
     - ip: 3.3.3.10
       desc: 'Network to Advertise'
 - name: r4
-  box: ubuntu/trusty64
-  mem: 512
+  box: centos/7
+  memory: 512
   cpus: 1
   priv_ip_1: 192.168.250.104  #HostOnly interface
   priv_ips:  #Internal only interfaces
