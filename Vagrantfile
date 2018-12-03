@@ -17,10 +17,12 @@ Vagrant.configure(2) do |config|
       subconfig.vm.box = node["box"]
       #subconfig.vm.provision :shell, path: "bootstrap_ansible.sh"
       subconfig.vm.network "private_network", ip: node["priv_ip_1"]
-      ints = node["priv_ips"]
-      ints.each do |int|
-        subconfig.vm.network "private_network", ip: int["ip"], virtualbox__intnet: int["desc"]
+
+      private_networks = node["private_networks"]
+      private_networks.each do |private_network|
+        subconfig.vm.network "private_network", ip: private_network["ip"], virtualbox__intnet: private_network["desc"]
       end
+      
       subconfig.vm.synced_folder ".", "/vagrant"
       subconfig.vm.provider "virtualbox" do |v|
         v.memory = node["memory"]
