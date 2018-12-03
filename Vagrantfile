@@ -11,20 +11,20 @@ Vagrant.configure(2) do |config|
 #  config.ssh.insert_key = false
 #  config.vm.provision :shell, path: "bootstrap.sh"
 
-  NODES.each do |nodes|
-    config.vm.define nodes["name"] do |node|
-      node.vm.hostname = nodes["name"]
-      node.vm.box = nodes["box"]
-#      node.vm.provision :shell, path: "bootstrap_ansible.sh"
-      node.vm.network "private_network", ip: nodes["priv_ip_1"]
-      ints = nodes["priv_ips"]
+  NODES.each do |node|
+    config.vm.define node["name"] do |subconfig|
+      subconfig.vm.hostname = node["name"]
+      subconfig.vm.box = node["box"]
+      #subconfig.vm.provision :shell, path: "bootstrap_ansible.sh"
+      subconfig.vm.network "private_network", ip: node["priv_ip_1"]
+      ints = node["priv_ips"]
       ints.each do |int|
-        node.vm.network "private_network", ip: int["ip"], virtualbox__intnet: int["desc"]
+        subconfig.vm.network "private_network", ip: int["ip"], virtualbox__intnet: int["desc"]
       end
-      node.vm.synced_folder ".", "/vagrant"
-      node.vm.provider "virtualbox" do |v|
-        v.memory = nodes["mem"]
-        v.cpus = nodes["cpus"]
+      subconfig.vm.synced_folder ".", "/vagrant"
+      subconfig.vm.provider "virtualbox" do |v|
+        v.memory = node["mem"]
+        v.cpus = node["cpus"]
       end
     end
   end
