@@ -39,12 +39,14 @@ Vagrant.configure(2) do |config|
       if node["forwarded_ports"]
         forwarded_ports = node["forwarded_ports"]
         forwarded_ports.each do |forwarded_port|
-        # :private_network INSTEAD OF "private_network"
         subconfig.vm.network :forwarded_port, guest: forwarded_port["guest"], host: forwarded_port["host"]
         end
       end
 
-      subconfig.vm.synced_folder "../../projects", "/home/vagrant/www"
+      # dmode配置目录权限，fmode配置文件权限  //默认权限777
+      # ansible/ansible.cfg 必须设定为不可写入
+      subconfig.vm.synced_folder "../../projects", "/home/vagrant/www", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=664"]
+
       subconfig.vm.synced_folder ".", "/vagrant", disabled: true
       subconfig.vm.provider "virtualbox" do |vb|
         vb.name = "centos7x-" + node["name"] # virtual box 的顯示名稱
