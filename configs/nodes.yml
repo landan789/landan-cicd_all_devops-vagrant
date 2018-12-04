@@ -38,6 +38,20 @@
   forwarded_ports:
     - guest: 80
       host: 80
+    - guest: 81
+      host: 8081
+    - guest: 3000
+      host: 3000
+    - guest: 3306
+      host: 3306
+    - guest: 443
+      host: 8443
+    - guest: 9229
+      host: 9229
+    - uest: 9222
+      host: 9222
+    - uest: 9200
+      host: 9200
 - name: php1
   box: centos/7
   cpus: 1
