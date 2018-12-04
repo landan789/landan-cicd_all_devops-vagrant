@@ -21,7 +21,7 @@ Vagrant.configure(2) do |config|
       subconfig.ssh.insert_key = false # must be false, ~/.ssh/authorized_keys in VM can not be modified chmod after Vagrant 1.8.5
       #subconfig.ssh.private_key_path = "./.ssh/id_rsa" # must be comment , ~/.ssh/authorized_keys in VM can not be modified chmod after Vagrant 1.8.5
 
-      subconfig.vm.hostname = "centos7x-" + node["name"]
+      subconfig.vm.hostname = node["name"] + "-centos7x"
       subconfig.vm.box = node["box"]
       #subconfig.vm.provision :shell, path: "bootstrap_ansible.sh"
 
@@ -49,7 +49,7 @@ Vagrant.configure(2) do |config|
 
       subconfig.vm.synced_folder ".", "/vagrant", disabled: true
       subconfig.vm.provider "virtualbox" do |vb|
-        vb.name = "centos7x-" + node["name"] # virtual box 的顯示名稱
+        vb.name = node["name"] + "-centos7x"  # virtual box 的顯示名稱
         vb.gui = false
         vb.cpus = node["cpus"]
         vb.memory = node["memory"]
