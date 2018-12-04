@@ -15,7 +15,7 @@ Vagrant.configure(2) do |config|
 
   NODES.each do |node|
     config.vm.define node["name"] do |subconfig|
-  	  subconfig.ssh.username = "vagrant"
+      subconfig.ssh.username = "vagrant"
       #subconfig.ssh.password = "vagrant"
       subconfig.ssh.forward_agent = true
       subconfig.ssh.insert_key = false # must be false, ~/.ssh/authorized_keys in VM can not be modified chmod after Vagrant 1.8.5
