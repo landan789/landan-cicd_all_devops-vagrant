@@ -6,6 +6,8 @@ require 'yaml'
 
 # Read yaml node definitions to create **Update nodes.yml to reflect any changes
 NODES = YAML.load_file('configs/nodes.yml')
+PROJECT = YAML.load_file('configs/project.yml')
+
 SCRIPTS_PATH = "shells/"
 ssh_pub_key = File.readlines("C:/Users/Administrator/.ssh/id_rsa.pub").first.strip
 
@@ -14,14 +16,14 @@ Vagrant.configure(2) do |config|
 #  config.vm.provision :shell, path: "bootstrap.sh"
 
   NODES.each do |node|
-    config.vm.define node["name"] do |subconfig|
+    config.vm.define PROJECT["name"] + "-" + node["name"] do |subconfig|
       subconfig.ssh.username = "vagrant"
       #subconfig.ssh.password = "vagrant"
       subconfig.ssh.forward_agent = true
       subconfig.ssh.insert_key = false # must be false, ~/.ssh/authorized_keys in VM can not be modified chmod after Vagrant 1.8.5
       #subconfig.ssh.private_key_path = "./.ssh/id_rsa" # must be comment , ~/.ssh/authorized_keys in VM can not be modified chmod after Vagrant 1.8.5
 
-      subconfig.vm.hostname = node["name"] + "-centos7x"
+      subconfig.vm.hostname = PROJECT["name"] + "-" + node["name"]  
       subconfig.vm.box = node["box"]
       #subconfig.vm.provision :shell, path: "bootstrap_ansible.sh"
 
@@ -49,7 +51,7 @@ Vagrant.configure(2) do |config|
 
       subconfig.vm.synced_folder ".", "/vagrant", disabled: true
       subconfig.vm.provider "virtualbox" do |vb|
-        vb.name = node["name"] + "-centos7x"  # virtual box 的顯示名稱
+        vb.name = PROJECT["name"] + "-" + node["name"] # virtual box 的顯示名稱
         vb.gui = false
         vb.cpus = node["cpus"]
         vb.memory = node["memory"]
