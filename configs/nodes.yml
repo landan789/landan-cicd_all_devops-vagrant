@@ -36,7 +36,7 @@
     - path: yum_update.sh
     - path: restart_sshd.sh
   private_networks:  #Internal only interfaces
-    - ip: '10.0.0.13'
+    - ip: '10.0.0.14'
       desc: 'Network to Advertise'
 - name: nginx
   box: centos/7
