@@ -4,6 +4,7 @@
   cpus: 1
   memory: 512
   shells:
+    - path: yum_update.sh
     - path: restart_sshd.sh
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.11'
@@ -22,8 +23,18 @@
   cpus: 1
   memory: 512
   shells:
-    - path: restart_sshd.sh
     - path: yum_update.sh
+    - path: restart_sshd.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.13'
+      desc: 'Network to Advertise'
+- name: jira
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum_update.sh
+    - path: restart_sshd.sh
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.13'
       desc: 'Network to Advertise'
@@ -32,8 +43,8 @@
   cpus: 1
   memory: 512
   shells:
-    - path: restart_sshd.sh
     - path: yum_update.sh
+    - path: restart_sshd.sh
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.21'
       desc: 01-to-04
@@ -59,8 +70,8 @@
   cpus: 1
   memory: 512
   shells:
-    - path: restart_sshd.sh
     - path: yum_update.sh
+    - path: restart_sshd.sh
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.31'
       desc: 01-to-04
@@ -69,6 +80,7 @@
   cpus: 1
   memory: 512
   shells:
+    - path: yum_update.sh
     - path: restart_sshd.sh
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.32'
@@ -78,8 +90,8 @@
   cpus: 1
   memory: 512
   shells:
-    - path: restart_sshd.sh
     - path: yum_update.sh
+    - path: restart_sshd.sh
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.41'
       desc: 01-to-04
@@ -88,8 +100,8 @@
   cpus: 1
   memory: 512
   shells:
-    - path: restart_sshd.sh
     - path: yum_update.sh
+    - path: restart_sshd.sh
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.42'
       desc: 01-to-04
@@ -98,8 +110,8 @@
   cpus: 1
   memory: 512
   shells:
-    - path: restart_sshd.sh
     - path: yum_update.sh
+    - path: restart_sshd.sh
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.43'
       desc: 01-to-04
