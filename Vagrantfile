@@ -5,8 +5,8 @@
 require 'yaml'
 
 # Read yaml node definitions to create **Update nodes.yml to reflect any changes
-NODES = YAML.load_file('configs/nodes.yml')
-PROJECT = YAML.load_file('configs/project.yml')
+NODES = YAML.load_file('vars/nodes.yml')
+PROJECT = YAML.load_file('vars/project.yml')
 
 SCRIPTS_PATH = "shells/"
 ssh_pub_key = File.readlines("C:/Users/Administrator/.ssh/id_rsa.pub").first.strip
