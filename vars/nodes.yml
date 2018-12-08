@@ -71,9 +71,9 @@
       host: 8443
     - guest: 9229
       host: 9229
-    - uest: 9222
+    - guest: 9222
       host: 9222
-    - uest: 9200
+    - guest: 9200
       host: 9200
 - name: php1
   box: centos/7
