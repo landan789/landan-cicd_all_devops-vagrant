@@ -28,7 +28,7 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.13'
       desc: 'Network to Advertise'
-- name: jira
+- name: zabbix
   box: centos/7
   cpus: 1
   memory: 512
@@ -37,6 +37,16 @@
     - path: restart_sshd.sh
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.14'
+      desc: 'Network to Advertise'
+- name: jira
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum_update.sh
+    - path: restart_sshd.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.15'
       desc: 'Network to Advertise'
 - name: nginx
   box: centos/7
