@@ -75,7 +75,7 @@
       host: 9222
     - guest: 9200
       host: 9200
-- name: php1
+- name: golang1
   box: centos/7
   cpus: 1
   memory: 512
@@ -85,7 +85,7 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.31'
       desc: 01-to-04
-- name: php2
+- name: golang2
   box: centos/7
   cpus: 1
   memory: 512
@@ -95,7 +95,7 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.32'
       desc: 01-to-04
-- name: mysql1
+- name: php1
   box: centos/7
   cpus: 1
   memory: 512
@@ -105,7 +105,7 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.41'
       desc: 01-to-04
-- name: mysql2
+- name: php2
   box: centos/7
   cpus: 1
   memory: 512
@@ -115,6 +115,26 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.42'
       desc: 01-to-04
+- name: mysql1
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum_update.sh
+    - path: restart_sshd.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.51'
+      desc: 01-to-04
+- name: mysql2
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum_update.sh
+    - path: restart_sshd.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.52'
+      desc: 01-to-04
 - name: mysql3
   box: centos/7
   cpus: 1
@@ -123,5 +143,5 @@
     - path: yum_update.sh
     - path: restart_sshd.sh
   private_networks:  #Internal only interfaces
-    - ip: '10.0.0.43'
+    - ip: '10.0.0.53'
       desc: 01-to-04
