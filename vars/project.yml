@@ -1,3 +1,4 @@
 ---
 name: landan
-id_rsa: '"C:/Users/Administrator/.ssh/id_rsa.pub"'
+id_rsa: 'C:/Users/Administrator/.ssh/id_rsa.pub'
+shell_path: 'shells/'
