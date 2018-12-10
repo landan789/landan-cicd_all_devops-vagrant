@@ -9,23 +9,23 @@ NODES = YAML.load_file('vars/nodes.yml')
 PROJECT = YAML.load_file('vars/project.yml')
 
 SCRIPTS_PATH = "shells/"
-ssh_pub_key = File.readlines("C:/Users/Administrator/.ssh/id_rsa.pub").first.strip
+ssh_pub_key = File.readlines(PROJECT["id_rsa"]).first.strip
 
 Vagrant.configure(2) do |config|
-#  config.ssh.insert_key = false
-#  config.vm.provision :shell, path: "bootstrap.sh"
+  # config.ssh.insert_key = false
+  # config.vm.provision :shell, path: "bootstrap.sh"
 
   NODES.each do |node|
     config.vm.define PROJECT["name"] + "-" + node["name"] do |subconfig|
       subconfig.ssh.username = "vagrant"
-      #subconfig.ssh.password = "vagrant"
+      # subconfig.ssh.password = "vagrant"
       subconfig.ssh.forward_agent = true
       subconfig.ssh.insert_key = false # must be false, ~/.ssh/authorized_keys in VM can not be modified chmod after Vagrant 1.8.5
-      #subconfig.ssh.private_key_path = "./.ssh/id_rsa" # must be comment , ~/.ssh/authorized_keys in VM can not be modified chmod after Vagrant 1.8.5
+      # subconfig.ssh.private_key_path = "./.ssh/id_rsa" # must be comment , ~/.ssh/authorized_keys in VM can not be modified chmod after Vagrant 1.8.5
 
       subconfig.vm.hostname = PROJECT["name"] + "-" + node["name"]  
       subconfig.vm.box = node["box"]
-      #subconfig.vm.provision :shell, path: "bootstrap_ansible.sh"
+      # subconfig.vm.provision :shell, path: "bootstrap_ansible.sh"
 
       shells = node["shells"]
       shells.each do |shell|
@@ -48,14 +48,13 @@ Vagrant.configure(2) do |config|
       # dmode配置目录权限，fmode配置文件权限  //默认权限777
       # ansible/ansible.cfg 必须设定为不可写入
       subconfig.vm.synced_folder "../../projects", "/home/vagrant/www", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=664"]
-
       subconfig.vm.synced_folder ".", "/vagrant", disabled: true
+
       subconfig.vm.provider "virtualbox" do |vb|
         vb.name = PROJECT["name"] + "-" + node["name"] # virtual box 的顯示名稱
         vb.gui = false
         vb.cpus = node["cpus"]
         vb.memory = node["memory"]
-
       end
     end
   end
