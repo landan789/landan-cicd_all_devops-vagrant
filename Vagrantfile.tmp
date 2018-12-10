@@ -1,3 +1,4 @@
+# 没有用到的档案，提示原始的 Vagrantfile
 Vagrant.configure("2") do |config|
   config.vm.define "web" do |web|
   web.vm.box = "geerlingguy/ubuntu1604"
