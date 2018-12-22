@@ -23,5 +23,5 @@ case $idrsa_pub in
 esac
 
 
-sed -i "s/CP_NAME/${name}/g" ./vars/env.yml
-sed -i "s|CP_IDRSA_PUB|${idrsa_pub}|g" ./vars/env.yml
+sed -i "s/CP_NAME/${name}/g" ./vars/project.yml
+sed -i "s|CP_IDRSA_PUB|${idrsa_pub}|g" ./vars/project.yml
