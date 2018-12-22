@@ -1,2 +1,3 @@
 .vagrant/*
 /vars/env.yml
+/vars/nodes.yml
