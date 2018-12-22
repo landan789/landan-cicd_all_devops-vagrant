@@ -1,4 +1,4 @@
 .vagrant/*
-/vars/env.yml
+/vars/project.yml
 /vars/nodes.yml
 /Vagrantfile
