@@ -7,5 +7,5 @@ echo "================================"
 
 sudo sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
 sudo service sshd restart
-touch /home/vagrant/.ssh/authorized_keys
-echo $ssh_key > /home/vagrant/.ssh/authorized_keys
+# touch /home/vagrant/.ssh/authorized_keys
+# echo $ssh_key > /home/vagrant/.ssh/authorized_keys
