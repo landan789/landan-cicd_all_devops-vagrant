@@ -115,7 +115,7 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.42'
       desc: 01-to-04
-- name: mysql1
+- name: node1
   box: centos/7
   cpus: 1
   memory: 512
@@ -125,6 +125,16 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.51'
       desc: 01-to-04
+- name: mysql1
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum_update.sh
+    - path: restart_sshd.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.61'
+      desc: 01-to-04
 - name: mysql2
   box: centos/7
   cpus: 1
@@ -133,7 +143,7 @@
     - path: yum_update.sh
     - path: restart_sshd.sh
   private_networks:  #Internal only interfaces
-    - ip: '10.0.0.52'
+    - ip: '10.0.0.62'
       desc: 01-to-04
 - name: mysql3
   box: centos/7
