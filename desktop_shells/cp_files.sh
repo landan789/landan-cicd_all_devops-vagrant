@@ -1,3 +1,3 @@
-cp -f Vagrantfile.develop Vagrantfile
-cp -f vars/nodes.develop.yml vars/nodes.yml
-cp -f vars/project.develop.yml vars/project.yml
+cp -f Vagrantfile.dev Vagrantfile
+cp -f vars/nodes.dev.yml vars/nodes.yml
+cp -f vars/project.dev.yml vars/project.yml
