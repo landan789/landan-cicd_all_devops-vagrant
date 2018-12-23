@@ -7,7 +7,7 @@ require 'yaml'
 # Read yaml node definitions to create **Update nodes.yml to reflect any changes
 NODES = YAML.load_file('vars/nodes.yml')
 PROJECT = YAML.load_file('vars/project.yml')
-SHELL_PATH = 'vagrant_shells/'
+SHELL_PATH = 'linux_shells/'
 
 ssh_pub_key_string = File.readlines(PROJECT["id_rsa"]).first.strip
 

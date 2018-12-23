@@ -25,7 +25,7 @@
 
 [5]. 步骤五，到此项目的根目录，使用预先打包好的 shell script 替换配置文件 (如果收悉配置，可以自己手动修改)
 ```shell
-sh desktop_shells/main.sh
+sh vagrant_shells/main.sh
 ```
 ---------------------------------------
 
@@ -42,7 +42,7 @@ sh desktop_shells/main.sh
 
 ---------------------------------------
 
-[8]. 步骤八，安裝 vagrant 插件
+[8]. 步骤八，於 Windows (或 MAC ) 安裝 vagrant 插件
 ```shell
 vagrant plugin install vagrant-vbguest
 ```
@@ -52,7 +52,7 @@ vagrant plugin install vagrant-vbguest
 vagrant up
 ```
 
-[10]. 步骤十，利用 vagrant 启动虚拟机
+[10]. 步骤十，利用 vagrant 於 Windows (或 MAC ) , 強制 執行 
 ```shell
 vagrant up --provision
 ```
