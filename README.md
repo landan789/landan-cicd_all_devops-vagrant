@@ -23,60 +23,72 @@
 ```
 ---------------------------------------
 
-[5]. 步骤五，到此项目的根目录，使用预先打包好的 shell script 替换配置文件 (如果收悉配置，可以自己手动修改)
+[5]. 步骤五，到 Windows Update 更新 Win 版本
+```shell
+略
+```
+---------------------------------------
+
+[6]. 步骤六，若为 Win 7 ，请安装 Power shell 3
+```shell
+略
+```
+---------------------------------------
+
+[7]. 步骤七，到此项目的根目录，使用预先打包好的 shell script 替换配置文件 (如果收悉配置，可以自己手动修改)
 ```shell
 sh vagrant_shells/main.sh
 ```
 ---------------------------------------
 
-[6]. 步骤六，置 vars/nodes.yml , 做进阶 配置 (一般可跳过)
+[8]. 步骤八，置 vars/nodes.yml , 做进阶 配置 (一般可跳过)
 ```shell
 略
 ```
 ---------------------------------------
-[7]. 步骤七，置 Vagrantfile , 做进阶 配置 (一般可跳过)
+[9]. 步骤九，置 Vagrantfile , 做进阶 配置 (一般可跳过)
 ```shell
 略
 ```
 ---------------------------------------
 
-[8]. 步骤八，於 Windows (或 MAC ) 安裝 vagrant 插件
+[10]. 步骤十，於 Windows (或 MAC ) 安裝 vagrant 插件
 ```shell
 vagrant plugin install vagrant-vbguest
 ```
 ---------------------------------------
 
-[9]. 步骤九，利用 vagrant 启动虚拟机
+[11]. 步骤十一，利用 vagrant 启动虚拟机
 ```shell
 vagrant up
 ```
 ---------------------------------------
 
-[10]. 步骤十，利用 vagrant , 於 Linux 強制 執行 linux_shells/*.sh  
+[12]. 步骤十二，利用 vagrant , 於 Linux 強制 執行 linux_shells/*.sh  
 ```shell
 vagrant up --provision
 ```
 ---------------------------------------
 
-[11]. 步骤十一，利用 vagrant halt, 關閉所有虛擬機
+[13]. 步骤十三，利用 vagrant halt, 關閉所有虛擬機
 ```shell
 vagrant halt
 ```
 ---------------------------------------
 
-[12]. 步骤十二，利用 vagrant up, 再次開啟所有虛擬機
+[14]. 步骤十四，利用 vagrant up, 再次開啟所有虛擬機
 ```shell
 vagrant up
 ```
 ---------------------------------------
 
-[13]. 步骤十三，使用 Xshell 或 MobaXterm ，ssh 登入 VM (USERNAME:vagrant, IP:127.0.0.1, PORT:2222)
+[15]. 步骤十五，使用 Xshell 或 MobaXterm ，ssh 登入 VM (USERNAME:vagrant, IP:127.0.0.1, PORT:2222)
 ```shell
 略
 ```
 ---------------------------------------
 
-[14]. 步骤十四，完成
+[16]. 步骤十六，完成
 ```shell
 略
 ```
@@ -110,4 +122,12 @@ vagrant status
 ```shell
 vagrant ssh-config
 ```
+
+---------------------------------------
+
+[*]. 注意事项
+```shell
+vagrant 必须更新 windows 版本
+```
+
 ---------------------------------------
