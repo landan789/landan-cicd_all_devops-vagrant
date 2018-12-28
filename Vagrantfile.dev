@@ -9,7 +9,7 @@ NODES = YAML.load_file('vars/nodes.yml')
 PROJECT = YAML.load_file('vars/project.yml')
 SHELL_PATH = 'linux_shells/'
 
-ssh_pub_key_string = File.readlines(PROJECT["id_rsa"]).first.strip
+#ssh_pub_key_string = File.readlines(PROJECT["id_rsa"]).first.strip
 
 Vagrant.configure(2) do |config|
   # config.ssh.insert_key = false
@@ -29,7 +29,7 @@ Vagrant.configure(2) do |config|
 
       shells = node["shells"]
       shells.each do |shell|
-        subconfig.vm.provision "shell", path: SHELL_PATH + shell["path"], args: [ssh_pub_key_string]
+        subconfig.vm.provision "shell", path: SHELL_PATH + shell["path"]
       end
 
       private_networks = node["private_networks"]
