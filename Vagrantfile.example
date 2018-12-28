@@ -1,30 +1,36 @@
-# 没有用到的档案，提示原始的 Vagrantfile
 Vagrant.configure("2") do |config|
-  config.vm.define "web" do |web|
-  web.vm.box = "geerlingguy/ubuntu1604"
-  web.vm.hostname = 'web'
-  web.vm.box_url = "geerlingguy/ubuntu1604"
+  
+  config.vm.box = "centos/7"
+  config.vm.network "forwarded_port", adapter: 1, guest: 22, host: 2222, id: "ssh"
+  config.vm.network "forwarded_port", adapter: 1, guest: 80, host: 80
+  config.vm.network "forwarded_port", adapter: 1, guest: 3000, host: 3000   
+  config.vm.network "forwarded_port", adapter: 1, guest: 3001, host: 3001   # www-chatshier
+  config.vm.network "forwarded_port", adapter: 1, guest: 3002, host: 3002   # api-chatshier
+  # config.vm.network "forwarded_port", adapter: 1, guest: 80, host: 8080     # api-chatshier http
+  config.vm.network "forwarded_port", adapter: 1, guest: 443, host: 8443    # api-chatshier https
+  config.vm.network "forwarded_port", adapter: 1, guest: 81, host: 8081     # react-chatshier http
+  config.vm.network "forwarded_port", adapter: 1, guest: 444, host: 8444     # react-chatshier https
+  config.vm.network "forwarded_port", adapter: 1, guest: 9229, host: 9229   # Node inspect
+  config.vm.network "forwarded_port", adapter: 1, guest: 9222, host: 9222   # Chrome dev
+  config.vm.network "forwarded_port", adapter: 1, guest: 27017, host: 27017 # MongoDB
+  config.vm.network "forwarded_port", adapter: 1, guest: 9200, host: 9200   # Elasticsearch
+  config.vm.network "forwarded_port", adapter: 1, guest: 3306, host: 3306   # MySQL
 
-  web.vm.network :private_network, ip: "192.168.56.101"
+  #config.vm.hostname = "fea.chatshier.com"
+  config.vm.synced_folder "../../projects", "/home/vagrant/www"
+  config.vm.synced_folder ".", "/vagrant", disabled: true
 
-  web.vm.provider :virtualbox do |v|
-  v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-  v.customize ["modifyvm", :id, "--memory", 512]
-  v.customize ["modifyvm", :id, "--name", "web"]
+  config.ssh.username = "vagrant"
+  #config.ssh.password = "vagrant"
+  config.ssh.forward_agent = true
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.name = "9thflr"
+    vb.gui = false
+    vb.cpus = 2
+    vb.memory = "2048"
+    vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]  # allow virtualbox to enalbe symlinks
   end
-  end
 
-  config.vm.define "db" do |db|
-  db.vm.box = "geerlingguy/ubuntu1604"
-  db.vm.hostname = 'db'
-  db.vm.box_url = "geerlingguy/ubuntu1604"
 
-  db.vm.network :private_network, ip: "192.168.56.102"
-
-  db.vm.provider :virtualbox do |v|
-  v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-  v.customize ["modifyvm", :id, "--memory", 512]
-  v.customize ["modifyvm", :id, "--name", "db"]
-  end
-  end
 end
