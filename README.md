@@ -29,7 +29,7 @@
 ```
 ---------------------------------------
 
-[6]. 步骤六，若为 Win 7 ，请安装 Power shell 3
+[6]. 步骤六，若为 Win 7 ，请安装 Power shell 3 或更高版本 (https://docs.microsoft.com/en-us/powershell/scripting/install/installing-windows-powershell?view=powershell-6)
 ```shell
 略
 ```
