@@ -11,7 +11,7 @@ case $name in
 esac
 
 
-read -p "请输入Windows PC 或 MAC 中 ssh 资料夹位置 (如: C:/User/landan/.ssh/ ):  "  ssh_dir
+read -p "请输入Windows PC 或 MAC 中 ssh 资料夹位置 (如: C:/Users/landan/.ssh/ ):  "  ssh_dir
 
 case $ssh_dir in
     "") 
