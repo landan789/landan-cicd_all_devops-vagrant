@@ -28,3 +28,5 @@ sudo echo "$id_rsa_pub" > /root/.ssh/id_rsa.pub
 
 sudo chmod -R 700 /home/vagrant/.ssh/
 sudo chmod -R 700 /root/.ssh/
+
+sudo chown -R vagrant:vagrant /home/vagrant/.ssh/
