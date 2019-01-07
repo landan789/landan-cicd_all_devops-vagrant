@@ -10,6 +10,9 @@ echo "[id_rsa.pub in your PC is ]" # double quot will resolve varibles before it
 echo "$id_rsa_pub"
 echo "================================"
 
+mkdir -p /home/vagrant/.ssh
+mkdir -p /root/.ssh
+
 touch /home/vagrant/.ssh/id_rsa
 touch /home/vagrant/.ssh/id_rsa.pub
 
