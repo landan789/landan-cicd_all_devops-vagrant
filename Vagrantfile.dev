@@ -9,9 +9,9 @@ NODES = YAML.load_file('vars/nodes.yml')
 PROJECT = YAML.load_file('vars/project.yml')
 SHELL_PATH = 'linux_shells/'
 
-ssh_id_rsa_string = File.readlines(PROJECT["ssh_dir"].gsub(/\/$/, '/') + "id_rsa").first.strip
+ssh_id_rsa_string = File.read(PROJECT["ssh_dir"].gsub(/\/$/, '/') + "id_rsa")
 
-ssh_id_rsa_pub_string = File.readlines(PROJECT["ssh_dir"].gsub(/\/$/, '/') + "id_rsa.pub").first.strip
+ssh_id_rsa_pub_string = File.read(PROJECT["ssh_dir"].gsub(/\/$/, '/') + "id_rsa.pub")
 
 Vagrant.configure(2) do |config|
   # config.ssh.insert_key = false
