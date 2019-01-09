@@ -25,3 +25,19 @@ esac
 
 sed -i "s/SED_NAME/${name}/g" ./vars/project.yml
 sed -i "s|SED_SSH_DIR|${ssh_dir}|g" ./vars/project.yml
+
+read -p "是否使用單機模式(y/n):  "  yn
+
+case $yn in
+    "n") 
+        echo "使用單虛擬機開發模式"
+        echo "[EXIT] ..."
+        exit
+        ;;
+    *)
+        sed -i "s/##//g" ./vars/project.yml
+        echo "使用多虛擬機開發模式"
+        echo "[EXIT] ..."
+        exit
+        ;;
+esac

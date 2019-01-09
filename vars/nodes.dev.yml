@@ -1,53 +1,53 @@
 ---
-- name: ansible
-  box: centos/7
-  cpus: 1
-  memory: 512
-  shells:
-    - path: yum-update.sh
-    - path: restart-sshd.sh
-  private_networks:  #Internal only interfaces
-    - ip: '10.0.0.11'
-      desc: 01-to-02
-- name: gitlab
-  box: centos/7
-  cpus: 1
-  memory: 512
-  shells:
-    - path: restart-sshd.sh
-  private_networks:  #Internal only interfaces
-    - ip: '10.0.0.12'
-      desc: 02-to-03
-- name: jenkins
-  box: centos/7
-  cpus: 1
-  memory: 512
-  shells:
-    - path: yum-update.sh
-    - path: restart-sshd.sh
-  private_networks:  #Internal only interfaces
-    - ip: '10.0.0.13'
-      desc: 'Network to Advertise'
-- name: zabbix
-  box: centos/7
-  cpus: 1
-  memory: 512
-  shells:
-    - path: yum-update.sh
-    - path: restart-sshd.sh
-  private_networks:  #Internal only interfaces
-    - ip: '10.0.0.14'
-      desc: 'Network to Advertise'
-- name: jira
-  box: centos/7
-  cpus: 1
-  memory: 512
-  shells:
-    - path: yum-update.sh
-    - path: restart-sshd.sh
-  private_networks:  #Internal only interfaces
-    - ip: '10.0.0.15'
-      desc: 'Network to Advertise'
+##- name: ansible
+##  box: centos/7
+##  cpus: 1
+##  memory: 512
+##  shells:
+##    - path: yum-update.sh
+##    - path: restart-sshd.sh
+##  private_networks:  #Internal only interfaces
+##    - ip: '10.0.0.11'
+##      desc: 01-to-02
+##- name: gitlab
+##  box: centos/7
+##  cpus: 1
+##  memory: 512
+##  shells:
+##    - path: restart-sshd.sh
+##  private_networks:  #Internal only interfaces
+##    - ip: '10.0.0.12'
+##      desc: 02-to-03
+##- name: jenkins
+##  box: centos/7
+##  cpus: 1
+##  memory: 512
+##  shells:
+##    - path: yum-update.sh
+##    - path: restart-sshd.sh
+##  private_networks:  #Internal only interfaces
+##    - ip: '10.0.0.13'
+##      desc: 'Network to Advertise'
+##- name: zabbix
+##  box: centos/7
+##  cpus: 1
+##  memory: 512
+##  shells:
+##    - path: yum-update.sh
+##    - path: restart-sshd.sh
+##  private_networks:  #Internal only interfaces
+##    - ip: '10.0.0.14'
+##      desc: 'Network to Advertise'
+##- name: jira
+##  box: centos/7
+##  cpus: 1
+##  memory: 512
+##  shells:
+##    - path: yum-update.sh
+##    - path: restart-sshd.sh
+##  private_networks:  #Internal only interfaces
+##    - ip: '10.0.0.15'
+##      desc: 'Network to Advertise'
 - name: nginx
   box: centos/7
   cpus: 1
@@ -80,88 +80,88 @@
       host: 9200
     - guest: 27017  # MongoDB 
       host: 27017
-- name: golang1
-  box: centos/7
-  cpus: 1
-  memory: 512
-  shells:
-    - path: yum-update.sh
-    - path: echo-id_rsa-to-ssh.sh
-    - path: restart-sshd.sh
-  private_networks:  #Internal only interfaces
-    - ip: '10.0.0.31'
-      desc: 01-to-04
-- name: golang2
-  box: centos/7
-  cpus: 1
-  memory: 512
-  shells:
-    - path: yum-update.sh
-    - path: echo-id_rsa-to-ssh.sh
-    - path: restart-sshd.sh
-  private_networks:  #Internal only interfaces
-    - ip: '10.0.0.32'
-      desc: 01-to-04
-- name: php1
-  box: centos/7
-  cpus: 1
-  memory: 512
-  shells:
-    - path: yum-update.sh
-    - path: echo-id_rsa-to-ssh.sh
-    - path: restart-sshd.sh
-  private_networks:  #Internal only interfaces
-    - ip: '10.0.0.41'
-      desc: 01-to-04
-- name: php2
-  box: centos/7
-  cpus: 1
-  memory: 512
-  shells:
-    - path: yum-update.sh
-    - path: echo-id_rsa-to-ssh.sh
-    - path: restart-sshd.sh
-  private_networks:  #Internal only interfaces
-    - ip: '10.0.0.42'
-      desc: 01-to-04
-- name: node1
-  box: centos/7
-  cpus: 1
-  memory: 512
-  shells:
-    - path: yum-update.sh
-    - path: echo-id_rsa-to-ssh.sh
-    - path: restart-sshd.sh
-  private_networks:  #Internal only interfaces
-    - ip: '10.0.0.51'
-      desc: 01-to-04
-- name: mysql1
-  box: centos/7
-  cpus: 1
-  memory: 512
-  shells:
-    - path: yum-update.sh
-    - path: restart-sshd.sh
-  private_networks:  #Internal only interfaces
-    - ip: '10.0.0.61'
-      desc: 01-to-04
-- name: mysql2
-  box: centos/7
-  cpus: 1
-  memory: 512
-  shells:
-    - path: yum-update.sh
-    - path: restart-sshd.sh
-  private_networks:  #Internal only interfaces
-    - ip: '10.0.0.62'
-      desc: 01-to-04
-- name: mysql3
-  box: centos/7
-  cpus: 1
-  memory: 512
-  shells:
-    - path: yum-update.sh
-    - path: restart-sshd.sh
-  private_networks:  #Internal only interfaces
-    - ip: '10.0.0.53'
-      desc: 01-to-04
+##- name: golang1
+##  box: centos/7
+##  cpus: 1
+##  memory: 512
+##  shells:
+##    - path: yum-update.sh
+##    - path: echo-id_rsa-to-ssh.sh
+##    - path: restart-sshd.sh
+##  private_networks:  #Internal only interfaces
+##    - ip: '10.0.0.31'
+##      desc: 01-to-04
+##- name: golang2
+##  box: centos/7
+##  cpus: 1
+##  memory: 512
+##  shells:
+##    - path: yum-update.sh
+##    - path: echo-id_rsa-to-ssh.sh
+##    - path: restart-sshd.sh
+##  private_networks:  #Internal only interfaces
+##    - ip: '10.0.0.32'
+##      desc: 01-to-04
+##- name: php1
+##  box: centos/7
+##  cpus: 1
+##  memory: 512
+##  shells:
+##    - path: yum-update.sh
+##    - path: echo-id_rsa-to-ssh.sh
+##    - path: restart-sshd.sh
+##  private_networks:  #Internal only interfaces
+##    - ip: '10.0.0.41'
+##      desc: 01-to-04
+##- name: php2
+##  box: centos/7
+##  cpus: 1
+##  memory: 512
+##  shells:
+##    - path: yum-update.sh
+##    - path: echo-id_rsa-to-ssh.sh
+##    - path: restart-sshd.sh
+##  private_networks:  #Internal only interfaces
+##    - ip: '10.0.0.42'
+##      desc: 01-to-04
+##- name: node1
+##  box: centos/7
+##  cpus: 1
+##  memory: 512
+##  shells:
+##    - path: yum-update.sh
+##    - path: echo-id_rsa-to-ssh.sh
+##    - path: restart-sshd.sh
+##  private_networks:  #Internal only interfaces
+##    - ip: '10.0.0.51'
+##      desc: 01-to-04
+##- name: mysql1
+##  box: centos/7
+##  cpus: 1
+##  memory: 512
+##  shells:
+##    - path: yum-update.sh
+##    - path: restart-sshd.sh
+##  private_networks:  #Internal only interfaces
+##    - ip: '10.0.0.61'
+##      desc: 01-to-04
+##- name: mysql2
+##  box: centos/7
+##  cpus: 1
+##  memory: 512
+##  shells:
+##    - path: yum-update.sh
+##    - path: restart-sshd.sh
+##  private_networks:  #Internal only interfaces
+##    - ip: '10.0.0.62'
+##      desc: 01-to-04
+##- name: mysql3
+##  box: centos/7
+##  cpus: 1
+##  memory: 512
+##  shells:
+##    - path: yum-update.sh
+##    - path: restart-sshd.sh
+##  private_networks:  #Internal only interfaces
+##    - ip: '10.0.0.53'
+##      desc: 01-to-04
