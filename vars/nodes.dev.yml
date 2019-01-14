@@ -70,6 +70,8 @@
       host: 3306   
     - guest: 443    # HTTPS
       host: 8443
+    - guest: 5601   # Kibana
+      host: 5601
     - guest: 9001   # Supervisor Web GUI
       host: 9001
     - guest: 9229   # Node Inspector
