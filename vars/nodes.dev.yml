@@ -163,5 +163,5 @@
     - path: yum-update.sh
     - path: restart-sshd.sh
   private_networks:  #Internal only interfaces
-    - ip: '10.0.0.53'
+    - ip: '10.0.0.63'
       desc: 01-to-04
