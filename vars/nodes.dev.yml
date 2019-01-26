@@ -1,22 +1,62 @@
 ---
+# #- name: all
+# #  box: centos/7
+# #  cpus: 1
+# #  memory: 512
+# #  shells:
+# #    - path: yum-update.sh
+# #    - path: echo-id_rsa-to-ssh.sh
+# #    - path: restart-sshd.sh
+# #    - path: echo-etc_hosts.sh
+# #  private_networks:  #Internal only interfaces
+# #    - ip: '10.0.0.11'
+# #      desc: 01-to-04
+# #  forwarded_ports:
+# #    - guest: 80     # HTTP
+# #      host: 80
+# #    - guest: 81
+# #      host: 8081
+# #    - guest: 3000   # React Server
+# #      host: 3000
+# #    - guest: 3306   # MYSQL
+# #      host: 3306   
+# #    - guest: 443    # HTTPS
+# #      host: 8443
+# #    - guest: 5601   # Kibana
+# #      host: 5601
+# #    - guest: 9001   # Supervisor Web GUI
+# #      host: 9001
+# #    - guest: 9229   # Node Inspector
+# #      host: 9229
+# #    - guest: 9222   # Chrome debug
+# #      host: 9222
+# #    - guest: 9200   # Elasticsearch 
+# #      host: 9200
+# #    - guest: 27017  # MongoDB 
+# #      host: 27017
 ##- name: ansible
 ##  box: centos/7
 ##  cpus: 1
 ##  memory: 512
 ##  shells:
 ##    - path: yum-update.sh
+##    - path: echo-id_rsa-to-ssh.sh
 ##    - path: restart-sshd.sh
+##    - path: echo-etc_hosts.sh
 ##  private_networks:  #Internal only interfaces
-##    - ip: '10.0.0.11'
+##    - ip: '10.0.0.21'
 ##      desc: 01-to-02
 ##- name: gitlab
 ##  box: centos/7
 ##  cpus: 1
 ##  memory: 512
 ##  shells:
+##    - path: yum-update.sh
+##    - path: echo-id_rsa-to-ssh.sh
 ##    - path: restart-sshd.sh
+##    - path: echo-etc_hosts.sh
 ##  private_networks:  #Internal only interfaces
-##    - ip: '10.0.0.12'
+##    - ip: '10.0.0.22'
 ##      desc: 02-to-03
 ##- name: jenkins
 ##  box: centos/7
@@ -24,9 +64,11 @@
 ##  memory: 512
 ##  shells:
 ##    - path: yum-update.sh
+##    - path: echo-id_rsa-to-ssh.sh
 ##    - path: restart-sshd.sh
+##    - path: echo-etc_hosts.sh
 ##  private_networks:  #Internal only interfaces
-##    - ip: '10.0.0.13'
+##    - ip: '10.0.0.23'
 ##      desc: 'Network to Advertise'
 ##- name: zabbix
 ##  box: centos/7
@@ -34,9 +76,11 @@
 ##  memory: 512
 ##  shells:
 ##    - path: yum-update.sh
+##    - path: echo-id_rsa-to-ssh.sh
 ##    - path: restart-sshd.sh
+##    - path: echo-etc_hosts.sh
 ##  private_networks:  #Internal only interfaces
-##    - ip: '10.0.0.14'
+##    - ip: '10.0.0.24'
 ##      desc: 'Network to Advertise'
 ##- name: jira
 ##  box: centos/7
@@ -44,44 +88,47 @@
 ##  memory: 512
 ##  shells:
 ##    - path: yum-update.sh
+##    - path: echo-id_rsa-to-ssh.sh
 ##    - path: restart-sshd.sh
+##    - path: echo-etc_hosts.sh
 ##  private_networks:  #Internal only interfaces
-##    - ip: '10.0.0.15'
+##    - ip: '10.0.0.25'
 ##      desc: 'Network to Advertise'
-- name: nginx
-  box: centos/7
-  cpus: 1
-  memory: 512
-  shells:
-    - path: yum-update.sh
-    - path: echo-id_rsa-to-ssh.sh
-    - path: restart-sshd.sh
-  private_networks:  #Internal only interfaces
-    - ip: '10.0.0.21'
-      desc: 01-to-04
-  forwarded_ports:
-    - guest: 80     # HTTP
-      host: 80
-    - guest: 81
-      host: 8081
-    - guest: 3000   # React Server
-      host: 3000
-    - guest: 3306   # MYSQL
-      host: 3306   
-    - guest: 443    # HTTPS
-      host: 8443
-    - guest: 5601   # Kibana
-      host: 5601
-    - guest: 9001   # Supervisor Web GUI
-      host: 9001
-    - guest: 9229   # Node Inspector
-      host: 9229
-    - guest: 9222   # Chrome debug
-      host: 9222
-    - guest: 9200   # Elasticsearch 
-      host: 9200
-    - guest: 27017  # MongoDB 
-      host: 27017
+##- name: nginx
+##  box: centos/7
+##  cpus: 1
+##  memory: 512
+##  shells:
+##    - path: yum-update.sh
+##    - path: echo-id_rsa-to-ssh.sh
+##    - path: restart-sshd.sh
+##    - path: echo-etc_hosts.sh
+##  private_networks:  #Internal only interfaces
+##    - ip: '10.0.0.31'
+##      desc: 01-to-04
+##  forwarded_ports:
+##    - guest: 80     #HTTP
+##      host: 80
+##    - guest: 81
+##      host: 8081
+##    - guest: 3000   #React Server
+##      host: 3000
+##    - guest: 3306   #MYSQL
+##      host: 3306   
+##    - guest: 443    #HTTPS
+##      host: 8443
+##    - guest: 5601   #Kibana
+##      host: 5601
+##    - guest: 9001   #Supervisor Web GUI
+##      host: 9001
+##    - guest: 9229   #Node Inspector
+##      host: 9229
+##    - guest: 9222   #Chrome debug
+##      host: 9222
+##    - guest: 9200   #Elasticsearch 
+##      host: 9200
+##    - guest: 27017  #MongoDB 
+##      host: 27017
 ##- name: golang1
 ##  box: centos/7
 ##  cpus: 1
@@ -90,8 +137,9 @@
 ##    - path: yum-update.sh
 ##    - path: echo-id_rsa-to-ssh.sh
 ##    - path: restart-sshd.sh
+##    - path: echo-etc_hosts.sh
 ##  private_networks:  #Internal only interfaces
-##    - ip: '10.0.0.31'
+##    - ip: '10.0.0.41'
 ##      desc: 01-to-04
 ##- name: golang2
 ##  box: centos/7
@@ -101,8 +149,9 @@
 ##    - path: yum-update.sh
 ##    - path: echo-id_rsa-to-ssh.sh
 ##    - path: restart-sshd.sh
+##    - path: echo-etc_hosts.sh
 ##  private_networks:  #Internal only interfaces
-##    - ip: '10.0.0.32'
+##    - ip: '10.0.0.42'
 ##      desc: 01-to-04
 ##- name: php1
 ##  box: centos/7
@@ -112,8 +161,9 @@
 ##    - path: yum-update.sh
 ##    - path: echo-id_rsa-to-ssh.sh
 ##    - path: restart-sshd.sh
+##    - path: echo-etc_hosts.sh
 ##  private_networks:  #Internal only interfaces
-##    - ip: '10.0.0.41'
+##    - ip: '10.0.0.51'
 ##      desc: 01-to-04
 ##- name: php2
 ##  box: centos/7
@@ -123,8 +173,9 @@
 ##    - path: yum-update.sh
 ##    - path: echo-id_rsa-to-ssh.sh
 ##    - path: restart-sshd.sh
+##    - path: echo-etc_hosts.sh
 ##  private_networks:  #Internal only interfaces
-##    - ip: '10.0.0.42'
+##    - ip: '10.0.0.52'
 ##      desc: 01-to-04
 ##- name: node1
 ##  box: centos/7
@@ -134,8 +185,9 @@
 ##    - path: yum-update.sh
 ##    - path: echo-id_rsa-to-ssh.sh
 ##    - path: restart-sshd.sh
+##    - path: echo-etc_hosts.sh
 ##  private_networks:  #Internal only interfaces
-##    - ip: '10.0.0.51'
+##    - ip: '10.0.0.61'
 ##      desc: 01-to-04
 ##- name: mysql1
 ##  box: centos/7
@@ -143,9 +195,11 @@
 ##  memory: 512
 ##  shells:
 ##    - path: yum-update.sh
+##    - path: echo-id_rsa-to-ssh.sh
 ##    - path: restart-sshd.sh
+##    - path: echo-etc_hosts.sh
 ##  private_networks:  #Internal only interfaces
-##    - ip: '10.0.0.61'
+##    - ip: '10.0.0.71'
 ##      desc: 01-to-04
 ##- name: mysql2
 ##  box: centos/7
@@ -153,9 +207,11 @@
 ##  memory: 512
 ##  shells:
 ##    - path: yum-update.sh
+##    - path: echo-id_rsa-to-ssh.sh
 ##    - path: restart-sshd.sh
+##    - path: echo-etc_hosts.sh
 ##  private_networks:  #Internal only interfaces
-##    - ip: '10.0.0.62'
+##    - ip: '10.0.0.72'
 ##      desc: 01-to-04
 ##- name: mysql3
 ##  box: centos/7
@@ -163,7 +219,9 @@
 ##  memory: 512
 ##  shells:
 ##    - path: yum-update.sh
+##    - path: echo-id_rsa-to-ssh.sh
 ##    - path: restart-sshd.sh
+##    - path: echo-etc_hosts.sh
 ##  private_networks:  #Internal only interfaces
-##    - ip: '10.0.0.63'
+##    - ip: '10.0.0.73'
 ##      desc: 01-to-04
