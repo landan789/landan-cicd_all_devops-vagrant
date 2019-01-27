@@ -33,14 +33,14 @@ read -p "是否使用 單虛擬機 模式 (y/n):  "  yn
 case $yn in
     "n") 
         echo "使用 多虛擬機 (multiple VM) 開發模式"
-        sed -i "s/##//g" ./vars/nodes.yml
+        sed -i "s/'off' # multiple/'on' # multiple/g" ./vars/nodes.yml
         echo ""
         echo "[EXIT] ..."
         exit
         ;;
     *)
         echo "使用 單虛擬機 (single VM) 開發模式"
-        sed -i "s/# #//g" ./vars/nodes.yml
+        sed -i "s/'off' # single/'on' # single/g" ./vars/nodes.yml
         echo ""
         echo "[EXIT] ..."
         exit
