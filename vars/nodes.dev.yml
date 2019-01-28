@@ -121,6 +121,19 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.25'
       desc: 'Network to Advertise'
+- name: kiban
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.26'
+      desc: 'Network to Advertise'
 
 ## nginx and load balance (10.0.0.31 ~ 10.0.0.39)
 - name: nginx
@@ -300,6 +313,32 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.72'
       desc: 01-to-04
+- name: beanstalkd
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.73'
+      desc: 01-to-04
+- name: logstash
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.74'
+      desc: 01-to-04
 
 ##  mysql (10.0.0.81 ~ 10.0.0.89)
 - name: mysql1
@@ -342,8 +381,8 @@
     - ip: '10.0.0.83'
       desc: 01-to-04
 
-##  elasticsearch (10.0.0.91 ~ 10.0.0.99)
-- name: elasticsearch1
+##  mongodb (10.0.0.91 ~ 10.0.0.99)
+- name: mongodb1
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -356,7 +395,7 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.91'
       desc: 01-to-04
-- name: elasticsearch2
+- name: mongodb2
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -370,8 +409,8 @@
     - ip: '10.0.0.92'
       desc: 01-to-04
 
-##  mongodb (10.0.0.101 ~ 10.0.0.109)
-- name: mongodb1
+##  elasticsearch (10.0.0.101 ~ 10.0.0.109)
+- name: elasticsearch1
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -384,7 +423,7 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.101'
       desc: 01-to-04
-- name: mongodb2
+- name: elasticsearch2
   status: 'off' # multiple
   box: centos/7
   cpus: 1
