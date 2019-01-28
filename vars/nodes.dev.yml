@@ -36,6 +36,15 @@
       host: 9200
     - guest: 27017  # MongoDB 
       host: 27017
+  synced_folders:
+    - src: "../../projects"
+      dest: "/home/vagrant/www"
+      owner: vagrant
+      group: vagrant
+      mount_options:
+        - "dmode=775,fmode=664"
+        # dmode配置目录权限，fmode配置文件权限  //默认权限777
+        # ansible/ansible.cfg 必须设定为不可写入
 
 ## cicd (10.0.0.21 ~ 10.0.0.29)
 - name: ansible
@@ -51,6 +60,15 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.21'
       desc: 01-to-02
+  synced_folders:
+    - src: "../../projects"
+      dest: "/home/vagrant/www"
+      owner: vagrant
+      group: vagrant
+      mount_options:
+        - "dmode=775,fmode=664"
+        # dmode配置目录权限，fmode配置文件权限  //默认权限777
+        # ansible/ansible.cfg 必须设定为不可写入
 - name: gitlab
   status: 'off' # multiple
   box: centos/7
@@ -156,6 +174,15 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.41'
       desc: 01-to-04
+  synced_folders:
+    - src: "../../projects"
+      dest: "/home/vagrant/www"
+      owner: vagrant
+      group: vagrant
+      mount_options:
+        - "dmode=775,fmode=664"
+        # dmode配置目录权限，fmode配置文件权限  //默认权限777
+        # ansible/ansible.cfg 必须设定为不可写入
 - name: golang2
   status: 'off' # multiple
   box: centos/7
@@ -169,7 +196,15 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.42'
       desc: 01-to-04
-
+  synced_folders:
+    - src: "../../projects"
+      dest: "/home/vagrant/www"
+      owner: vagrant
+      group: vagrant
+      mount_options:
+        - "dmode=775,fmode=664"
+        # dmode配置目录权限，fmode配置文件权限  //默认权限777
+        # ansible/ansible.cfg 必须设定为不可写入
 ## php (10.0.0.51 ~ 10.0.0.59)
 - name: php1
   status: 'off' # multiple
@@ -184,6 +219,15 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.51'
       desc: 01-to-04
+  synced_folders:
+    - src: "../../projects"
+      dest: "/home/vagrant/www"
+      owner: vagrant
+      group: vagrant
+      mount_options:
+        - "dmode=775,fmode=664"
+        # dmode配置目录权限，fmode配置文件权限  //默认权限777
+        # ansible/ansible.cfg 必须设定为不可写入
 - name: php2
   status: 'off' # multiple
   box: centos/7
@@ -197,7 +241,15 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.52'
       desc: 01-to-04
-
+  synced_folders:
+    - src: "../../projects"
+      dest: "/home/vagrant/www"
+      owner: vagrant
+      group: vagrant
+      mount_options:
+        - "dmode=775,fmode=664"
+        # dmode配置目录权限，fmode配置文件权限  //默认权限777
+        # ansible/ansible.cfg 必须设定为不可写入
 ## node (10.0.0.61 ~ 10.0.0.69)
 - name: node1
   status: 'off' # multiple
@@ -212,7 +264,15 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.61'
       desc: 01-to-04
-
+  synced_folders:
+    - src: "../../projects"
+      dest: "/home/vagrant/www"
+      owner: vagrant
+      group: vagrant
+      mount_options:
+        - "dmode=775,fmode=664"
+        # dmode配置目录权限，fmode配置文件权限  //默认权限777
+        # ansible/ansible.cfg 必须设定为不可写入
 ##  redis, memcached (10.0.0.71 ~ 10.0.0.79)
 - name: redis
   status: 'off' # multiple
