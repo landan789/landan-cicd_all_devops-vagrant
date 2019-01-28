@@ -121,7 +121,7 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.25'
       desc: 'Network to Advertise'
-- name: kiban
+- name: kibana
   status: 'off' # multiple
   box: centos/7
   cpus: 1
