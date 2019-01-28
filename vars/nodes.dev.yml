@@ -49,6 +49,7 @@
     - ip: '10.0.0.21'
       desc: 01-to-02
 - name: gitlab
+  status: 'off' # multiple
   box: centos/7
   cpus: 1
   memory: 512
