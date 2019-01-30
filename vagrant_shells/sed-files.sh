@@ -1,17 +1,5 @@
 #!/bin/bash
 echo ""
-read -p "请输入项目名称:  " name 
-
-case $name in
-    "") 
-        echo "[EXIT] ..."
-        exit
-        ;;
-    *)
-        ;;
-esac
-
-echo ""
 read -p "请输入 Windows PC 或 MAC OS 中 ssh 资料夹位置 (如: C:/Users/landan/.ssh/ ):  "  ssh_dir
 
 case $ssh_dir in
