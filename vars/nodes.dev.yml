@@ -145,33 +145,33 @@
     - path: echo-id_rsa-to-ssh.sh
     - path: restart-sshd.sh
     - path: echo-etc_hosts.sh
-  private_networks:  #Internal only interfaces
+  private_networks:  # Internal only interfaces
     - ip: '10.0.0.31'
       desc: 01-to-04
   forwarded_ports:
-   - guest: 80     #HTTP
+   - guest: 80     # HTTP
      host: 80
    - guest: 81
      host: 8081
-   - guest: 2222   #SSH
-     host: 2222
-   - guest: 3000   #React Server
+   - guest: 2222   # SSH
+     host: 2222    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+   - guest: 3000   # React Server
      host: 3000
-   - guest: 3306   #MYSQL
+   - guest: 3306   # MYSQL
      host: 3306   
-   - guest: 443    #HTTPS
+   - guest: 443    # HTTPS
      host: 8443
-   - guest: 5601   #Kibana
+   - guest: 5601   # Kibana
      host: 5601
-   - guest: 9001   #Supervisor Web GUI
+   - guest: 9001   # Supervisor Web GUI
      host: 9001
-   - guest: 9229   #Node Inspector
+   - guest: 9229   # Node Inspector
      host: 9229
-   - guest: 9222   #Chrome debug
+   - guest: 9222   # Chrome debug
      host: 9222
-   - guest: 9200   #Elasticsearch 
+   - guest: 9200   # Elasticsearch 
      host: 9200
-   - guest: 27017  #MongoDB 
+   - guest: 27017  # MongoDB 
      host: 27017
 
 ## golang (10.0.0.41 ~ 10.0.0.49)
