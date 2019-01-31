@@ -153,6 +153,8 @@
      host: 80
    - guest: 81
      host: 8081
+   - guest: 2222   #SSH
+     host: 2222
    - guest: 3000   #React Server
      host: 3000
    - guest: 3306   #MYSQL
