@@ -175,6 +175,14 @@
      host: 9200
    - guest: 27017  # MongoDB 
      host: 27017
+  synced_folders:
+    - src: "./../" # Vagrantfile 位置为基准
+      # src: "./../../projects" # Vagrantfile 位置为基准
+      dest: "/home/vagrant/www"
+      owner: vagrant
+      group: vagrant
+      mount_options:
+        - "dmode=777,fmode=666"   
 
 ## golang (10.0.0.41 ~ 10.0.0.49)
 - name: golang1
@@ -308,6 +316,15 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.71'
       desc: 01-to-04
+  synced_folders:
+    - src: "./../" # Vagrantfile 位置为基准
+      # src: "./../../projects" # Vagrantfile 位置为基准
+      dest: "/home/vagrant/www"
+      owner: vagrant
+      group: vagrant
+      mount_options:
+        - "dmode=777,fmode=666"
+        
 - name: memcached
   status: 'off' # multiple
   box: centos/7
@@ -376,6 +393,14 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.81'
       desc: 01-to-04
+  synced_folders:
+    - src: "./../" # Vagrantfile 位置为基准
+      # src: "./../../projects" # Vagrantfile 位置为基准
+      dest: "/home/vagrant/www"
+      owner: vagrant
+      group: vagrant
+      mount_options:
+        - "dmode=777,fmode=666"
 - name: mysql2
   status: 'off' # multiple
   box: centos/7
