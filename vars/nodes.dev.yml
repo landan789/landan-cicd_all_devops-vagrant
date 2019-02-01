@@ -39,7 +39,8 @@
     - guest: 27017  # MongoDB 
       host: 27017
   synced_folders:
-    - src: "./../../projects"
+    - src: "./../" # Vagrantfile 位置为基准
+      # src: "./../../projects" # Vagrantfile 位置为基准
       dest: "/home/vagrant/www"
       owner: vagrant
       group: vagrant
@@ -69,7 +70,8 @@
     - ip: '10.0.0.21'
       desc: 01-to-02
   synced_folders:
-    - src: "./../../projects"
+    - src: "./../" # Vagrantfile 位置为基准
+      # src: "./../../projects" # Vagrantfile 位置为基准
       dest: "/home/vagrant/www"
       owner: vagrant
       group: vagrant
@@ -189,7 +191,8 @@
     - ip: '10.0.0.41'
       desc: 01-to-04
   synced_folders:
-    - src: "../../projects"
+    - src: "./../" # Vagrantfile 位置为基准
+      # src: "./../../projects" # Vagrantfile 位置为基准
       dest: "/home/vagrant/www"
       owner: vagrant
       group: vagrant
@@ -233,7 +236,8 @@
     - ip: '10.0.0.51'
       desc: 01-to-04
   synced_folders:
-    - src: "./../../projects"
+    - src: "./../" # Vagrantfile 位置为基准
+      # src: "./../../projects" # Vagrantfile 位置为基准
       dest: "/home/vagrant/www"
       owner: vagrant
       group: vagrant
@@ -255,7 +259,8 @@
     - ip: '10.0.0.52'
       desc: 01-to-04
   synced_folders:
-    - src: "./../../projects"
+    - src: "./../" # Vagrantfile 位置为基准
+      # src: "./../../projects" # Vagrantfile 位置为基准
       dest: "/home/vagrant/www"
       owner: vagrant
       group: vagrant
@@ -279,7 +284,8 @@
     - ip: '10.0.0.61'
       desc: 01-to-04
   synced_folders:
-    - src: "./../../projects"
+    - src: "./../" # Vagrantfile 位置为基准
+      # src: "./../../projects" # Vagrantfile 位置为基准
       dest: "/home/vagrant/www"
       owner: vagrant
       group: vagrant
