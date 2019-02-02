@@ -15,7 +15,7 @@
       desc: 01-to-04
   forwarded_ports:
     - guest: 22     # SSH
-      host: 2222    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+      host: 22011   # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
     - guest: 80     # HTTP
       host: 80
     - guest: 81
@@ -69,6 +69,9 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.21'
       desc: 01-to-02
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22021    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
   synced_folders:
     - src: "./../" # Vagrantfile 位置为基准
       # src: "./../../projects" # Vagrantfile 位置为基准
@@ -98,6 +101,9 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.22'
       desc: 02-to-03
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22022    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 - name: jenkins
   status: 'off' # multiple
   box: centos/7
@@ -111,6 +117,9 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.23'
       desc: 'Network to Advertise'
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 2023    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 - name: zabbix
   status: 'off' # multiple
   box: centos/7
@@ -124,6 +133,9 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.24'
       desc: 'Network to Advertise'
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22024    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 - name: jira
   status: 'off' # multiple
   box: centos/7
@@ -137,7 +149,9 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.25'
       desc: 'Network to Advertise'
-
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22025    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 ## nginx and load balance (10.0.0.31 ~ 10.0.0.39)
 - name: nginx
   status: 'off' # multiple
@@ -153,6 +167,8 @@
     - ip: '10.0.0.31'
       desc: 01-to-04
   forwarded_ports:
+  -  guest: 22     # SSH
+     host: 22031    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
    - guest: 80     # HTTP
      host: 80
    - guest: 81
@@ -198,6 +214,9 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.41'
       desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22041    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
   synced_folders:
     - src: "./../" # Vagrantfile 位置为基准
       # src: "./../../projects" # Vagrantfile 位置为基准
@@ -220,6 +239,9 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.42'
       desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22042    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
   synced_folders:
     - src: "../../projects"
       dest: "/home/vagrant/www"
@@ -243,6 +265,9 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.51'
       desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22051    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
   synced_folders:
     - src: "./../" # Vagrantfile 位置为基准
       # src: "./../../projects" # Vagrantfile 位置为基准
@@ -266,6 +291,9 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.52'
       desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22052    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
   synced_folders:
     - src: "./../" # Vagrantfile 位置为基准
       # src: "./../../projects" # Vagrantfile 位置为基准
@@ -291,6 +319,9 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.61'
       desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22061    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
   synced_folders:
     - src: "./../" # Vagrantfile 位置为基准
       # src: "./../../projects" # Vagrantfile 位置为基准
@@ -324,7 +355,9 @@
       group: vagrant
       mount_options:
         - "dmode=777,fmode=666"
-        
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22071    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效        
 - name: memcached
   status: 'off' # multiple
   box: centos/7
@@ -338,6 +371,9 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.72'
       desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22072    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 - name: beanstalkd
   status: 'off' # multiple
   box: centos/7
@@ -351,6 +387,9 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.73'
       desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22073    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 - name: logstash
   status: 'off' # multiple
   box: centos/7
@@ -364,7 +403,9 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.74'
       desc: 01-to-04
-
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22074    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 - name: kibana
   status: 'off' # multiple
   box: centos/7
@@ -378,7 +419,9 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.75'
       desc: 'Network to Advertise'
-
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22075    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 ##  mysql (10.0.0.81 ~ 10.0.0.89)
 - name: mysql1
   status: 'off' # multiple
@@ -393,6 +436,9 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.81'
       desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22081    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
   synced_folders:
     - src: "./../" # Vagrantfile 位置为基准
       # src: "./../../projects" # Vagrantfile 位置为基准
@@ -414,6 +460,9 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.82'
       desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22082    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 - name: mysql3
   status: 'off' # multiple
   box: centos/7
@@ -427,7 +476,9 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.83'
       desc: 01-to-04
-
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22083    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 ##  mongodb (10.0.0.91 ~ 10.0.0.99)
 - name: mongodb1
   status: 'off' # multiple
@@ -442,6 +493,9 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.91'
       desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22091    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 - name: mongodb2
   status: 'off' # multiple
   box: centos/7
@@ -455,7 +509,9 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.92'
       desc: 01-to-04
-
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22092    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 ##  elasticsearch (10.0.0.101 ~ 10.0.0.109)
 - name: elasticsearch1
   status: 'off' # multiple
@@ -470,6 +526,9 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.101'
       desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22101    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 - name: elasticsearch2
   status: 'off' # multiple
   box: centos/7
@@ -483,3 +542,6 @@
   private_networks:  #Internal only interfaces
     - ip: '10.0.0.102'
       desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22102    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
