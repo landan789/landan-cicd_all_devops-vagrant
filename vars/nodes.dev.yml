@@ -167,7 +167,7 @@
     - ip: '10.0.0.31'
       desc: 01-to-04
   forwarded_ports:
-  -  guest: 22     # SSH
+   - guest: 22     # SSH
      host: 22031    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
    - guest: 80     # HTTP
      host: 80
