@@ -422,7 +422,7 @@
   forwarded_ports:
     - guest: 22     # SSH
       host: 22075    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-- name: mha-manager
+- name: masterha
   status: 'off' # multiple
   box: centos/7
   cpus: 1
