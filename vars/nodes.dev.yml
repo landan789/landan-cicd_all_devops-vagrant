@@ -169,28 +169,6 @@
   forwarded_ports:
    - guest: 22     # SSH
      host: 22031    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-   - guest: 80     # HTTP
-     host: 80
-   - guest: 81
-     host: 8081
-   - guest: 3000   # React Server
-     host: 3000
-   - guest: 3306   # MYSQL
-     host: 3306   
-   - guest: 443    # HTTPS
-     host: 8443
-   - guest: 5601   # Kibana
-     host: 5601
-   - guest: 9001   # Supervisor Web GUI
-     host: 9001
-   - guest: 9229   # Node Inspector
-     host: 9229
-   - guest: 9222   # Chrome debug
-     host: 9222
-   - guest: 9200   # Elasticsearch 
-     host: 9200
-   - guest: 27017  # MongoDB 
-     host: 27017
   synced_folders:
     - src: "./../" # Vagrantfile 位置为基准
       # src: "./../../projects" # Vagrantfile 位置为基准
