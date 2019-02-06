@@ -490,14 +490,6 @@
   forwarded_ports:
     - guest: 22     # SSH
       host: 22091    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-  synced_folders:
-    - src: "./../" # Vagrantfile 位置为基准
-      # src: "./../../projects" # Vagrantfile 位置为基准
-      dest: "/home/vagrant/www"
-      owner: vagrant
-      group: vagrant
-      mount_options:
-        - "dmode=777,fmode=666"
 - name: mysql2-1
   status: 'off' # multiple
   box: centos/7
@@ -513,7 +505,7 @@
       desc: 01-to-04
   forwarded_ports:
     - guest: 22     # SSH
-      host: 22082    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+      host: 22092    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 - name: mysql3-1
   status: 'off' # multiple
   box: centos/7
@@ -529,7 +521,7 @@
       desc: 01-to-04
   forwarded_ports:
     - guest: 22     # SSH
-      host: 22083    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+      host: 22093    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 ##  一级mongodb (10.0.0.101 ~ 10.0.0.109)
 - name: mongodb1
   status: 'off' # multiple
