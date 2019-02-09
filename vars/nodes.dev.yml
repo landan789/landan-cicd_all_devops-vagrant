@@ -57,7 +57,7 @@
 
 ## cicd (10.0.0.21 ~ 10.0.0.29)
 - name: ansible
-  status: 'on' # multiple
+  status: 'off' # multiple
   box: centos/7
   cpus: 1
   memory: 512
@@ -816,7 +816,7 @@
 ## MYSQL 高可用 mmm_monitor, masterha, ndb_management (10.0.0.171 ~ 10.0.0.179)
 
 - name: mmm_monitor
-  status: 'on' # multiple
+  status: 'off' # multiple
   box: centos/7
   cpus: 1
   memory: 512
@@ -848,7 +848,7 @@
     - guest: 22     # SSH
       host: 22172    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 - name: ndb_management-1
-  status: 'on' # multiple
+  status: 'off' # multiple
   box: centos/7
   cpus: 1
   memory: 512
@@ -864,7 +864,7 @@
     - guest: 22     # SSH
       host: 22173    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 - name: ndb_management-2
-  status: 'on' # multiple
+  status: 'off' # multiple
   box: centos/7
   cpus: 1
   memory: 512
@@ -882,7 +882,7 @@
 
 ##  零级 mysql (10.0.0.181 ~ 10.0.0.189)
 - name: mysql_cluster-1
-  status: 'on' # multiple
+  status: 'off' # multiple
   box: centos/7
   cpus: 1
   memory: 512
@@ -899,7 +899,7 @@
       host: 22181    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 
 - name: mysql_cluster-2
-  status: 'on' # multiple
+  status: 'off' # multiple
   box: centos/7
   cpus: 1
   memory: 512
@@ -918,7 +918,7 @@
 
 ##  一级 mysql (10.0.0.191 ~ 10.0.0.199)
 - name: mysql-1
-  status: 'on' # multiple
+  status: 'off' # multiple
   box: centos/7
   cpus: 1
   memory: 512
@@ -942,7 +942,7 @@
       mount_options:
         - "dmode=777,fmode=666"
 - name: mysql-2
-  status: 'on' # multiple
+  status: 'off' # multiple
   box: centos/7
   cpus: 1
   memory: 512
@@ -958,7 +958,7 @@
     - guest: 22     # SSH
       host: 22192    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 - name: mysql-3
-  status: 'on' # multiple
+  status: 'off' # multiple
   box: centos/7
   cpus: 1
   memory: 512
@@ -975,7 +975,7 @@
       host: 22193    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 ##  二级 mysql (10.0.0.191 ~ 10.0.0.199)
 - name: mysql-1_1
-  status: 'on' # multiple
+  status: 'off' # multiple
   box: centos/7
   cpus: 1
   memory: 512
@@ -991,7 +991,7 @@
     - guest: 22     # SSH
       host: 22201    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 - name: mysql-1_2
-  status: 'on' # multiple
+  status: 'off' # multiple
   box: centos/7
   cpus: 1
   memory: 512
