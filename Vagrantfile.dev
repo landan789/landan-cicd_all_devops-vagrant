@@ -29,7 +29,7 @@ Vagrant.configure(2) do |config|
 	      # subconfig.ssh.insert_key = false # must be false, ~/.ssh/authorized_keys in VM can not be modified chmod after Vagrant 1.8.5
 	      # subconfig.ssh.private_key_path = "./.ssh/id_rsa" # must be comment , ~/.ssh/authorized_keys in VM can not be modified chmod after Vagrant 1.8.5
 
-	      subconfig.vm.hostname = node["name"]  
+	      subconfig.vm.hostname = node["name"].gsub(/-/, '.').gsub(/_/, '-')
 	      subconfig.vm.box = node["box"]
 	      # subconfig.vm.provision :shell, path: "bootstrap_ansible.sh"
 
