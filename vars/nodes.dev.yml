@@ -1,7 +1,7 @@
 ---
 ## all in one (10.0.0.11)
 - name: one
-  status: 'off' # single
+  status: 'on' # single
   box: centos/7
   cpus: 1
   memory: 512
@@ -57,7 +57,7 @@
 
 ## cicd (10.0.0.21 ~ 10.0.0.29)
 - name: ansible
-  status: 'off' # multiple
+  status: 'on' # multiple
   box: centos/7
   cpus: 1
   memory: 512
@@ -152,8 +152,9 @@
   forwarded_ports:
     - guest: 22     # SSH
       host: 22025    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-## nginx and load balance (10.0.0.31 ~ 10.0.0.39)
-- name: nginx
+
+## nginx HA or LVS HA for golang(10.0.0.41 ~ 10.0.0.49)
+- name: golang-nginx_keepalived-1
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -164,37 +165,11 @@
     - path: restart-sshd.sh
     - path: echo-etc_hosts.sh
   private_networks:  # Internal only interfaces
-    - ip: '10.0.0.31'
-      desc: 01-to-04
-  forwarded_ports:
-   - guest: 22     # SSH
-     host: 22031    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-  synced_folders:
-    - src: "./../" # Vagrantfile 位置为基准
-      # src: "./../../projects" # Vagrantfile 位置为基准
-      dest: "/home/vagrant/www"
-      owner: vagrant
-      group: vagrant
-      mount_options:
-        - "dmode=777,fmode=666"   
-
-## golang (10.0.0.41 ~ 10.0.0.49)
-- name: golang1
-  status: 'off' # multiple
-  box: centos/7
-  cpus: 1
-  memory: 512
-  shells:
-    - path: yum-update.sh
-    - path: echo-id_rsa-to-ssh.sh
-    - path: restart-sshd.sh
-    - path: echo-etc_hosts.sh
-  private_networks:  #Internal only interfaces
     - ip: '10.0.0.41'
       desc: 01-to-04
   forwarded_ports:
-    - guest: 22     # SSH
-      host: 22041    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+   - guest: 22     # SSH
+     host: 22041    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
   synced_folders:
     - src: "./../" # Vagrantfile 位置为基准
       # src: "./../../projects" # Vagrantfile 位置为基准
@@ -203,8 +178,7 @@
       group: vagrant
       mount_options:
         - "dmode=777,fmode=666"
-
-- name: golang2
+- name: golang-nginx_keepalived-2
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -214,23 +188,59 @@
     - path: echo-id_rsa-to-ssh.sh
     - path: restart-sshd.sh
     - path: echo-etc_hosts.sh
-  private_networks:  #Internal only interfaces
+  private_networks:  # Internal only interfaces
     - ip: '10.0.0.42'
       desc: 01-to-04
   forwarded_ports:
-    - guest: 22     # SSH
-      host: 22042    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+   - guest: 22     # SSH
+     host: 22042    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
   synced_folders:
-    - src: "../../projects"
+    - src: "./../" # Vagrantfile 位置为基准
+      # src: "./../../projects" # Vagrantfile 位置为基准
       dest: "/home/vagrant/www"
       owner: vagrant
       group: vagrant
       mount_options:
         - "dmode=777,fmode=666"
-        # dmode配置目录权限，fmode配置文件权限  //默认权限777
-        # ansible/ansible.cfg 必须设定为不可写入
-## php (10.0.0.51 ~ 10.0.0.59)
-- name: php1
+
+## keepalived gor nginx for golang(10.0.0.41 ~ 10.0.0.49)
+
+- name: golang-lvs_keepalived-1
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  # Internal only interfaces
+    - ip: '10.0.0.43'
+      desc: 01-to-04
+  forwarded_ports:
+   - guest: 22     # SSH
+     host: 22043    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: golang-lvs_keepalived-2
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  # Internal only interfaces
+    - ip: '10.0.0.44'
+      desc: 01-to-04
+  forwarded_ports:
+   - guest: 22     # SSH
+     host: 22044    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+
+
+## golang (10.0.0.51 ~ 10.0.0.59)
+- name: golang-1
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -254,9 +264,8 @@
       group: vagrant
       mount_options:
         - "dmode=777,fmode=666"
-        # dmode配置目录权限，fmode配置文件权限  //默认权限777
-        # ansible/ansible.cfg 必须设定为不可写入
-- name: php2
+
+- name: golang-2
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -273,18 +282,17 @@
     - guest: 22     # SSH
       host: 22052    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
   synced_folders:
-    - src: "./../" # Vagrantfile 位置为基准
-      # src: "./../../projects" # Vagrantfile 位置为基准
+    - src: "../../projects"
       dest: "/home/vagrant/www"
       owner: vagrant
       group: vagrant
       mount_options:
         - "dmode=777,fmode=666"
         # dmode配置目录权限，fmode配置文件权限  //默认权限777
-        # ansible/ansible.cfg 必须设定为不可写入
-        
-## node (10.0.0.61 ~ 10.0.0.69)
-- name: node1
+        # ansible/ansible.cfg 必须设定为不可写入      
+
+## golang 的高可用 redis, memcached (10.0.0.61 ~ 10.0.0.69)
+- name: golang-memcached
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -300,19 +308,7 @@
   forwarded_ports:
     - guest: 22     # SSH
       host: 22061    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-  synced_folders:
-    - src: "./../" # Vagrantfile 位置为基准
-      # src: "./../../projects" # Vagrantfile 位置为基准
-      dest: "/home/vagrant/www"
-      owner: vagrant
-      group: vagrant
-      mount_options:
-        - "dmode=777,fmode=666"
-        # dmode配置目录权限，fmode配置文件权限  //默认权限777
-        # ansible/ansible.cfg 必须设定为不可写入
-        
-##  redis, memcached (10.0.0.71 ~ 10.0.0.79)
-- name: redis
+- name: golang-redis
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -323,36 +319,12 @@
     - path: restart-sshd.sh
     - path: echo-etc_hosts.sh
   private_networks:  #Internal only interfaces
-    - ip: '10.0.0.71'
-      desc: 01-to-04
-  synced_folders:
-    - src: "./../" # Vagrantfile 位置为基准
-      # src: "./../../projects" # Vagrantfile 位置为基准
-      dest: "/home/vagrant/www"
-      owner: vagrant
-      group: vagrant
-      mount_options:
-        - "dmode=777,fmode=666"
-  forwarded_ports:
-    - guest: 22     # SSH
-      host: 22071    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效        
-- name: memcached
-  status: 'off' # multiple
-  box: centos/7
-  cpus: 1
-  memory: 512
-  shells:
-    - path: yum-update.sh
-    - path: echo-id_rsa-to-ssh.sh
-    - path: restart-sshd.sh
-    - path: echo-etc_hosts.sh
-  private_networks:  #Internal only interfaces
-    - ip: '10.0.0.72'
+    - ip: '10.0.0.62'
       desc: 01-to-04
   forwarded_ports:
     - guest: 22     # SSH
-      host: 22072    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-- name: beanstalkd
+      host: 22062    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效        
+- name: golang-beanstalkd
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -363,12 +335,12 @@
     - path: restart-sshd.sh
     - path: echo-etc_hosts.sh
   private_networks:  #Internal only interfaces
-    - ip: '10.0.0.73'
+    - ip: '10.0.0.63'
       desc: 01-to-04
   forwarded_ports:
     - guest: 22     # SSH
-      host: 22073    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-- name: logstash
+      host: 22063    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: golang-logstash
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -379,12 +351,12 @@
     - path: restart-sshd.sh
     - path: echo-etc_hosts.sh
   private_networks:  #Internal only interfaces
-    - ip: '10.0.0.74'
+    - ip: '10.0.0.64'
       desc: 01-to-04
   forwarded_ports:
     - guest: 22     # SSH
-      host: 22074    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-- name: kibana
+      host: 22064    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: golang-kibana
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -395,12 +367,14 @@
     - path: restart-sshd.sh
     - path: echo-etc_hosts.sh
   private_networks:  #Internal only interfaces
-    - ip: '10.0.0.75'
+    - ip: '10.0.0.65'
       desc: 'Network to Advertise'
   forwarded_ports:
     - guest: 22     # SSH
-      host: 22075    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-- name: mmm_monitor
+      host: 22065    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效 
+
+## NGINX HA or keepalived HA for php (10.0.0.81 ~ 10.0.0.79)
+- name: php-nginx-keepalived-1
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -410,45 +384,45 @@
     - path: echo-id_rsa-to-ssh.sh
     - path: restart-sshd.sh
     - path: echo-etc_hosts.sh
-  private_networks:  #Internal only interfaces
-    - ip: '10.0.0.76'
-      desc: 'Network to Advertise'
-  forwarded_ports:
-    - guest: 22     # SSH
-      host: 22076    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-- name: masterha
-  status: 'off' # multiple
-  box: centos/7
-  cpus: 1
-  memory: 512
-  shells:
-    - path: yum-update.sh
-    - path: echo-id_rsa-to-ssh.sh
-    - path: restart-sshd.sh
-    - path: echo-etc_hosts.sh
-  private_networks:  #Internal only interfaces
-    - ip: '10.0.0.77'
-      desc: 'Network to Advertise'
-  forwarded_ports:
-    - guest: 22     # SSH
-      host: 22077    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-##  一级 mysql (10.0.0.81 ~ 10.0.0.89)
-- name: mysql1
-  status: 'off' # multiple
-  box: centos/7
-  cpus: 1
-  memory: 512
-  shells:
-    - path: yum-update.sh
-    - path: echo-id_rsa-to-ssh.sh
-    - path: restart-sshd.sh
-    - path: echo-etc_hosts.sh
-  private_networks:  #Internal only interfaces
+  private_networks:  # Internal only interfaces
     - ip: '10.0.0.81'
       desc: 01-to-04
   forwarded_ports:
-    - guest: 22     # SSH
-      host: 22081    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+   - guest: 22     # SSH
+     host: 22081    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: php-nginx-keepalived-2
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  # Internal only interfaces
+    - ip: '10.0.0.82'
+      desc: 01-to-04
+  forwarded_ports:
+   - guest: 22     # SSH
+     host: 22082    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+
+- name: php-lvs_keepalived-1
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  # Internal only interfaces
+    - ip: '10.0.0.83'
+      desc: 01-to-04
+  forwarded_ports:
+   - guest: 22     # SSH
+     host: 22083    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
   synced_folders:
     - src: "./../" # Vagrantfile 位置为基准
       # src: "./../../projects" # Vagrantfile 位置为基准
@@ -457,7 +431,7 @@
       group: vagrant
       mount_options:
         - "dmode=777,fmode=666"
-- name: mysql2
+- name: php-lvs_keepalived-2
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -467,30 +441,23 @@
     - path: echo-id_rsa-to-ssh.sh
     - path: restart-sshd.sh
     - path: echo-etc_hosts.sh
-  private_networks:  #Internal only interfaces
-    - ip: '10.0.0.82'
+  private_networks:  # Internal only interfaces
+    - ip: '10.0.0.84'
       desc: 01-to-04
   forwarded_ports:
-    - guest: 22     # SSH
-      host: 22082    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-- name: mysql3
-  status: 'off' # multiple
-  box: centos/7
-  cpus: 1
-  memory: 512
-  shells:
-    - path: yum-update.sh
-    - path: echo-id_rsa-to-ssh.sh
-    - path: restart-sshd.sh
-    - path: echo-etc_hosts.sh
-  private_networks:  #Internal only interfaces
-    - ip: '10.0.0.83'
-      desc: 01-to-04
-  forwarded_ports:
-    - guest: 22     # SSH
-      host: 22083    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-##  二级 mysql (10.0.0.91 ~ 10.0.0.99)
-- name: mysql1-1
+   - guest: 22     # SSH
+     host: 22084    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+  synced_folders:
+    - src: "./../" # Vagrantfile 位置为基准
+      # src: "./../../projects" # Vagrantfile 位置为基准
+      dest: "/home/vagrant/www"
+      owner: vagrant
+      group: vagrant
+      mount_options:
+        - "dmode=777,fmode=666"
+
+## php (10.0.0.91 ~ 10.0.0.99)
+- name: php-1
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -506,7 +473,17 @@
   forwarded_ports:
     - guest: 22     # SSH
       host: 22091    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-- name: mysql2-1
+  synced_folders:
+    - src: "./../" # Vagrantfile 位置为基准
+      # src: "./../../projects" # Vagrantfile 位置为基准
+      dest: "/home/vagrant/www"
+      owner: vagrant
+      group: vagrant
+      mount_options:
+        - "dmode=777,fmode=666"
+        # dmode配置目录权限，fmode配置文件权限  //默认权限777
+        # ansible/ansible.cfg 必须设定为不可写入
+- name: php-2
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -522,24 +499,19 @@
   forwarded_ports:
     - guest: 22     # SSH
       host: 22092    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-- name: mysql3-1
-  status: 'off' # multiple
-  box: centos/7
-  cpus: 1
-  memory: 512
-  shells:
-    - path: yum-update.sh
-    - path: echo-id_rsa-to-ssh.sh
-    - path: restart-sshd.sh
-    - path: echo-etc_hosts.sh
-  private_networks:  #Internal only interfaces
-    - ip: '10.0.0.93'
-      desc: 01-to-04
-  forwarded_ports:
-    - guest: 22     # SSH
-      host: 22093    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-##  一级mongodb (10.0.0.101 ~ 10.0.0.109)
-- name: mongodb1
+  synced_folders:
+    - src: "./../" # Vagrantfile 位置为基准
+      # src: "./../../projects" # Vagrantfile 位置为基准
+      dest: "/home/vagrant/www"
+      owner: vagrant
+      group: vagrant
+      mount_options:
+        - "dmode=777,fmode=666"
+        # dmode配置目录权限，fmode配置文件权限  //默认权限777
+        # ansible/ansible.cfg 必须设定为不可写入
+
+## php 的高可用 redis, memcached (10.0.0.101 ~ 10.0.0.109)
+- name: php-memcached
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -555,7 +527,7 @@
   forwarded_ports:
     - guest: 22     # SSH
       host: 22101    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-- name: mongodb2
+- name: php-redis
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -570,9 +542,8 @@
       desc: 01-to-04
   forwarded_ports:
     - guest: 22     # SSH
-      host: 22102    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-##  二级mongodb (10.0.0.111 ~ 10.0.0.119)
-- name: mongodb1-1
+      host: 22102    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效        
+- name: php-beanstalkd
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -583,12 +554,12 @@
     - path: restart-sshd.sh
     - path: echo-etc_hosts.sh
   private_networks:  #Internal only interfaces
-    - ip: '10.0.0.111'
+    - ip: '10.0.0.103'
       desc: 01-to-04
   forwarded_ports:
     - guest: 22     # SSH
-      host: 22111    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-- name: mongodb2-1
+      host: 22103    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: php-logstash
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -599,13 +570,31 @@
     - path: restart-sshd.sh
     - path: echo-etc_hosts.sh
   private_networks:  #Internal only interfaces
-    - ip: '10.0.0.112'
+    - ip: '10.0.0.104'
       desc: 01-to-04
   forwarded_ports:
     - guest: 22     # SSH
-      host: 22112    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-##  一级elasticsearch (10.0.0.121 ~ 10.0.0.129)
-- name: elasticsearch1
+      host: 22104    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: php-kibana
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.105'
+      desc: 'Network to Advertise'
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22105    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效 
+
+   
+## node (10.0.0.121 ~ 10.0.0.129)
+- name: node-1
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -621,24 +610,19 @@
   forwarded_ports:
     - guest: 22     # SSH
       host: 22121    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-- name: elasticsearch2
-  status: 'off' # multiple
-  box: centos/7
-  cpus: 1
-  memory: 512
-  shells:
-    - path: yum-update.sh
-    - path: echo-id_rsa-to-ssh.sh
-    - path: restart-sshd.sh
-    - path: echo-etc_hosts.sh
-  private_networks:  #Internal only interfaces
-    - ip: '10.0.0.122'
-      desc: 01-to-04
-  forwarded_ports:
-    - guest: 22     # SSH
-      host: 22122    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-##  二级elasticsearch (10.0.0.131 ~ 10.0.0.139)
-- name: elasticsearch1-1
+  synced_folders:
+    - src: "./../" # Vagrantfile 位置为基准
+      # src: "./../../projects" # Vagrantfile 位置为基准
+      dest: "/home/vagrant/www"
+      owner: vagrant
+      group: vagrant
+      mount_options:
+        - "dmode=777,fmode=666"
+        # dmode配置目录权限，fmode配置文件权限  //默认权限777
+        # ansible/ansible.cfg 必须设定为不可写入
+
+## node 的高可用 redis, memcached (10.0.0.131 ~ 10.0.0.139)
+- name: node-memcached
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -654,7 +638,7 @@
   forwarded_ports:
     - guest: 22     # SSH
       host: 22131    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-- name: elasticsearch2-1
+- name: node-redis
   status: 'off' # multiple
   box: centos/7
   cpus: 1
@@ -669,4 +653,518 @@
       desc: 01-to-04
   forwarded_ports:
     - guest: 22     # SSH
-      host: 22132    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+      host: 22132    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效        
+- name: node-beanstalkd
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.133'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22133    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: node-logstash
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.134'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22104    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: node-kibana
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.135'
+      desc: 'Network to Advertise'
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22135    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效 
+
+## python (10.0.0.151 ~ 10.0.0.159)
+- name: python-1
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.151'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22151    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+  synced_folders:
+    - src: "./../" # Vagrantfile 位置为基准
+      # src: "./../../projects" # Vagrantfile 位置为基准
+      dest: "/home/vagrant/www"
+      owner: vagrant
+      group: vagrant
+      mount_options:
+        - "dmode=777,fmode=666"
+        # dmode配置目录权限，fmode配置文件权限  //默认权限777
+        # ansible/ansible.cfg 必须设定为不可写入
+        
+## python 的高可用 redis, memcached (10.0.0.161 ~ 10.0.0.169)
+- name: python-memcached
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.161'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22161    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: node-redis
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.162'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22162    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效        
+- name: node-beanstalkd
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.163'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22163    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: node-logstash
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.164'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22164    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: node-kibana
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.165'
+      desc: 'Network to Advertise'
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22165    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效 
+
+## MYSQL 高可用 mmm_monitor, masterha, ndb_management (10.0.0.171 ~ 10.0.0.179)
+
+- name: mmm_monitor
+  status: 'on' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.171'
+      desc: 'Network to Advertise'
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22171    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: masterha
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.172'
+      desc: 'Network to Advertise'
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22172    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: ndb_management-1
+  status: 'on' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.173'
+      desc: 'Network to Advertise'
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22173    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: ndb_management-2
+  status: 'on' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.174'
+      desc: 'Network to Advertise'
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22174    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+
+##  一级 mysql (10.0.0.181 ~ 10.0.0.189)
+- name: mysql-1
+  status: 'on' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.181'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22181    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+  synced_folders:
+    - src: "./../" # Vagrantfile 位置为基准
+      # src: "./../../projects" # Vagrantfile 位置为基准
+      dest: "/home/vagrant/www"
+      owner: vagrant
+      group: vagrant
+      mount_options:
+        - "dmode=777,fmode=666"
+- name: mysql-2
+  status: 'on' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.182'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22182    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: mysql-3
+  status: 'on' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.183'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22183    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+##  二级 mysql (10.0.0.191 ~ 10.0.0.199)
+- name: mysql-1_1
+  status: 'on' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.191'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22191    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: mysql-1_2
+  status: 'on' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.192'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22192    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: mysql-2_1
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.193'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22193    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: mysql-2_2
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.194'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22194    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: mysql-3_1
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.195'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22195    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: mysql-3_2
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.196'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22196    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+
+##  一级mongodb (10.0.0.201 ~ 10.0.0.209)
+- name: mongodb-1
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.201'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22201    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: mongodb-2
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.202'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22202    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+##  二级mongodb (10.0.0.211 ~ 10.0.0.219)
+- name: mongodb-1_1
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.211'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22211    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: mongodb-2_1
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.212'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22212    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+
+##  一级elasticsearch (10.0.0.221 ~ 10.0.0.229)
+- name: elasticsearch-1
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.221'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22221    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: elasticsearch-2
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.222'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22222    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+##  二级elasticsearch (10.0.0.231 ~ 10.0.0.239)
+- name: elasticsearch-1_1
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.231'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22231    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
+- name: elasticsearch-2_1
+  status: 'off' # multiple
+  box: centos/7
+  cpus: 1
+  memory: 512
+  shells:
+    - path: yum-update.sh
+    - path: echo-id_rsa-to-ssh.sh
+    - path: restart-sshd.sh
+    - path: echo-etc_hosts.sh
+  private_networks:  #Internal only interfaces
+    - ip: '10.0.0.232'
+      desc: 01-to-04
+  forwarded_ports:
+    - guest: 22     # SSH
+      host: 22232    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
