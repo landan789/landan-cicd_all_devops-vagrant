@@ -973,7 +973,7 @@
   forwarded_ports:
     - guest: 22     # SSH
       host: 22193    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-##  二级 mysql (10.0.0.191 ~ 10.0.0.199)
+##  二级 mysql (10.0.0.201 ~ 10.0.0.209)
 - name: mysql-1_1
   status: 'off' # multiple
   box: centos/7
@@ -1071,7 +1071,7 @@
     - guest: 22     # SSH
       host: 22206    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 
-##  一级mongodb (10.0.0.201 ~ 10.0.0.209)
+##  一级mongodb (10.0.0.211 ~ 10.0.0.219)
 - name: mongodb-1
   status: 'off' # multiple
   box: centos/7
@@ -1104,7 +1104,7 @@
   forwarded_ports:
     - guest: 22     # SSH
       host: 22212    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-##  二级mongodb (10.0.0.211 ~ 10.0.0.219)
+##  二级mongodb (10.0.0.221 ~ 10.0.0.229)
 - name: mongodb-1_1
   status: 'off' # multiple
   box: centos/7
@@ -1138,7 +1138,7 @@
     - guest: 22     # SSH
       host: 22222    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
 
-##  一级elasticsearch (10.0.0.221 ~ 10.0.0.229)
+##  一级elasticsearch (10.0.0.231 ~ 10.0.0.239)
 - name: elasticsearch-1
   status: 'off' # multiple
   box: centos/7
@@ -1171,7 +1171,7 @@
   forwarded_ports:
     - guest: 22     # SSH
       host: 22232    # 一旦有换 SSH port 情形 vagrant up 的 ssh 会失效
-##  二级elasticsearch (10.0.0.231 ~ 10.0.0.239)
+##  二级elasticsearch (10.0.0.241 ~ 10.0.0.249)
 - name: elasticsearch-1_1
   status: 'off' # multiple
   box: centos/7
