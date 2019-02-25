@@ -30,6 +30,8 @@
       host: 4002
     - guest: 4003   # Go server
       host: 4003
+    - guest: 5001   # Supervisord HTTP server
+      host: 5001
     - guest: 3306   # MYSQL
       host: 3306   
     - guest: 443    # HTTPS
